@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#2f5fb3">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Algèbre 1">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/icon-180.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<title>Vidéos Algèbre 1 — chapitres 1 et 2</title>
+<style>
+  :root{--ink:#1d1d1f;--muted:#6b6b75;--bg:#f6f5f2;--card:#fff;--line:#e4e1da;--accent:#c4302b;--ok:#2e7d4f}
+  @media (prefers-color-scheme:dark){:root{--ink:#eceae6;--muted:#a3a19c;--bg:#161616;--card:#222;--line:#333}}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+  main{max-width:640px;margin:0 auto;padding:18px max(14px,env(safe-area-inset-right)) 60px max(14px,env(safe-area-inset-left))}
+  h1{font-size:1.45rem;margin:4px 0 4px}
+  .sub{color:var(--muted);font-size:.92rem;margin:0 0 12px}
+  .progress{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 14px;margin:12px 0 6px;font-size:.92rem}
+  .bar{height:8px;background:var(--line);border-radius:4px;overflow:hidden;margin-top:6px}
+  .bar>i{display:block;height:100%;width:0;background:var(--ok);transition:width .3s}
+  nav{display:flex;gap:6px;overflow-x:auto;padding:8px 0;position:sticky;top:0;background:var(--bg);z-index:2}
+  nav a{flex:0 0 auto;text-decoration:none;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:.85rem}
+  h2{font-size:1.1rem;margin:22px 0 4px}
+  .hint{color:var(--muted);font-size:.85rem;margin:0 0 8px}
+  .v{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin:8px 0}
+  .v a{flex:1;color:var(--ink);text-decoration:none;min-height:44px;display:flex;flex-direction:column;justify-content:center}
+  .v a b{font-weight:600;font-size:.97rem}
+  .v a small{color:var(--muted);font-size:.8rem;margin-top:2px}
+  .v .play{flex:0 0 34px;height:34px;border-radius:9px;background:var(--accent);display:flex;align-items:center;justify-content:center}
+  .v .play:after{content:"";border-left:11px solid #fff;border-top:7px solid transparent;border-bottom:7px solid transparent;margin-left:3px}
+  .v.star{border-color:#e0b000;border-width:2px}
+  .v label{flex:0 0 auto;display:flex;align-items:center;gap:4px;font-size:.75rem;color:var(--muted)}
+  .v input{width:22px;height:22px;accent-color:var(--ok)}
+  .v.done{opacity:.55}
+  .tips{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 16px;margin-top:24px;font-size:.92rem}
+  .tips li{margin:4px 0}
+</style>
+</head>
+<body>
+<main>
+<h1>📺 Vidéos Algèbre 1</h1>
+<p class="sub">Chapitres 1 et 2 du poly, dans l'ordre du cours. Les cartes ⭐ sont à regarder en priorité (une par thème). Touche une vidéo pour l'ouvrir dans YouTube, puis coche « vu ».</p>
+
+<p><a href="index.html" style="display:inline-block;background:#2f5fb3;color:#fff;text-decoration:none;padding:9px 14px;border-radius:9px;font-weight:600">📘 Retour au cours</a></p>
+<div class="progress"><span id="count">0</span> vidéo(s) vue(s) sur <span id="total">0</span>
+  <div class="bar"><i id="bar"></i></div></div>
+
+<nav>
+  <a href="#logique">0 · Logique</a><a href="#images">1 · Images</a><a href="#injsurj">2 · Inj/Surj</a>
+  <a href="#relations">3 · Relations</a><a href="#cardinal">4 · Cardinal</a><a href="#denombrement">5 · Dénombrement</a>
+</nav>
+
+<div id="list"></div>
+
+<div class="tips"><b>Pour que ça serve vraiment</b>
+<ol>
+<li>Regarde d'abord les ⭐, dans l'ordre 0 → 5.</li>
+<li>Après chaque vidéo, refais les exercices corrigés du thème <b>sans regarder la correction</b>.</li>
+<li>Passe en vitesse ×1,25 ou ×1,5 sur ce que tu comprends déjà.</li>
+<li>Regarder ne suffit pas : il faut refaire soi-même. Les vidéos servent à débloquer.</li>
+</ol></div>
+</main>
+
+<script>
+const S=[
+ {id:"logique",t:"0 · Logique et quantificateurs",h:"À voir en premier : c'est le langage de tout le cours.",v:[
+  ["aWSe1fjJHEM","Logique et raisonnements, partie 1 : logique","Exo7 · assertions, quantificateurs",1],
+  ["nfJizOU7DbA","Exercice : quantificateurs et leur négation","Exo7"],
+  ["QSbHxGnf-9M","Exercice : négation, « ou », « et »","Exo7"],
+  ["2tmyTz5_2Rw","Exercice : logique, ensembles","Exo7"]]},
+ {id:"images",t:"1 · Applications, image directe, image réciproque",h:"Cours §1.1 à 1.6.",v:[
+  ["Y8cV0zcFijs","Ensembles et applications, partie 2 : applications","Exo7 · cours",1],
+  ["FDYd1Iv74Fc","Image directe et réciproque, exemples avec graphiques","pour « voir » f(A) et f⁻¹(B)"],
+  ["VME0meAVQXA","L'image directe d'un sous-ensemble","cours"],
+  ["RvLvtMPMUZA","Exercice : image directe et réciproque d'un ensemble","exercice"],
+  ["4oiOWKIigwc","Exercice corrigé : image directe, image réciproque","exercice"],
+  ["SHsUCeLFau4","TD corrigé 1 : image directe et réciproque","exercice"],
+  ["_i7EKBnSsDY","Image directe, image réciproque, partie 4","cours"],
+  ["CdNApNfRims","Exercice 3 : image directe et réciproque d'une partie","exercice"]]},
+ {id:"injsurj",t:"2 · Injection, surjection, bijection",h:"Cours §1.7 à 1.9. Le thème le plus fréquent au partiel.",v:[
+  ["KQMQ4EFLjG0","Ensembles et applications, partie 3 : injection, surjection, bijection","Exo7 · cours",1],
+  ["oimGp-OqISw","Injective, surjective, bijective : cours + exemples","cours",1],
+  ["LTaxdlxthN8","Fonction injective, surjective, bijective","cours court"],
+  ["oXVCLMdvr9E","Injection, surjection, bijection à partir d'un exercice simple","exercice"],
+  ["GVJXQpK7lpY","Exercice 4 : injection, surjection, bijection","Exo7 · exercice"],
+  ["OY5Y2seCUvI","Exercice corrigé : images + injective + surjective","mélange tout le chapitre 1"],
+  ["5YbO_zqQb0M","Injective, Surjective and Bijective Functions","🇬🇧 en anglais · bons schémas"]]},
+ {id:"relations",t:"3 · Relations, équivalence, ordre, classes",h:"Cours §2.1 à 2.3.",v:[
+  ["WuJyP_7VIu8","Ensembles et applications, partie 5 : relation d'équivalence","Exo7 · cours",1],
+  ["0qoX6sNm2Jc","Relations binaires 2/3 : relations d'équivalence","cours"],
+  ["Od2GzE7Fj9k","Relations (Mathématiques, L1)","ordre, équivalence, classes, quotient"],
+  ["AD9KwkSE4fs","Relation d'équivalence : définition, classe, quotient, exemple","cours"],
+  ["9KJhUOKy5BE","Relations binaires partie 5 : relations d'équivalence","cours"],
+  ["yHG6t5IMwbM","Classe d'équivalence pour x R y ⟺ x² = y²","même type que l'exercice 2.3"],
+  ["d4cdC5dakV4","La classe d'équivalence : exercices corrigés","exercices"],
+  ["vf0_R5F6cfc","Exercice 1 : relation d'équivalence, relation d'ordre","Exo7 · exercice"],
+  ["t7QwqxS5RzQ","Exercice 2 : relation d'équivalence, relation d'ordre","Exo7 · exercice"],
+  ["et4YDMbRqiM","Classes d'équivalence et espace quotient","un peu plus avancé"]]},
+ {id:"cardinal",t:"4 · Ensembles finis, cardinal, Poincaré",h:"Cours §2.4 à 2.7.",v:[
+  ["Zis0x6aWEUg","Cardinal et dénombrement (Bac +1)","pile ton niveau",1],
+  ["EQnHUvhtJrA","Cardinal d'un ensemble fini","cours"],
+  ["tSZ5fdXhEDE","Calculer le cardinal d'un ensemble fini","méthode"],
+  ["dL6gf_L36UY","Essentiels Prépa : la formule du crible","Poincaré"],
+  ["qeJwHJ4fcOo","Formule du crible de Poincaré","cours"],
+  ["6A4HrdC8e8c","La formule de Poincaré","cours"]]},
+ {id:"denombrement",t:"5 · Dénombrement",h:"Cours §2.8 : listes, arrangements, permutations, combinaisons.",v:[
+  ["Cb-jNj-RyBE","Combinatoire et dénombrement : tout le cours expliqué simplement","cours complet",1],
+  ["knkBV8daGBg","Combinaison, arrangement, k-uplet : comment choisir ?","la question n°1 des exercices",1],
+  ["r29fcGw0-7I","Quelle formule utiliser : k-uplet, arrangement, permutation, combinaison ?","méthode"],
+  ["hWkIwXXEECc","Arrangement, permutation, combinaison : lequel choisir ?","méthode"],
+  ["trgDKgEC3fI","p-liste, arrangement, permutation, combinaison : cours et exercices","cours + exercices"],
+  ["kzMk3GRsPUI","Cours : n-uplets, arrangements, permutations, combinaisons","cours"],
+  ["2fKdO9t8wfo","Utiliser les arrangements pour dénombrer","exercices"],
+  ["_ip2dV_BUTM","Utiliser les combinaisons pour dénombrer","exercices"],
+  ["GMSYzHqZPR0","Arrangement, combinaison et p-uplet","cours"]]}
+];
+let seen={};try{seen=JSON.parse(localStorage.getItem("vus-algebre1")||"{}")}catch(e){}
+function save(){try{localStorage.setItem("vus-algebre1",JSON.stringify(seen))}catch(e){}}
+const list=document.getElementById("list");let total=0;
+for(const s of S){
+  const h=document.createElement("h2");h.id=s.id;h.textContent=s.t;list.appendChild(h);
+  const p=document.createElement("p");p.className="hint";p.textContent=s.h;list.appendChild(p);
+  for(const [id,title,note,star] of s.v){
+    total++;
+    const d=document.createElement("div");d.className="v"+(star?" star":"")+(seen[id]?" done":"");
+    d.innerHTML='<span class="play"></span><a href="https://www.youtube.com/watch?v='+id+'" target="_blank" rel="noopener"><b></b><small></small></a><label><input type="checkbox">vu</label>';
+    d.querySelector("b").textContent=(star?"⭐ ":"")+title;d.querySelector("small").textContent=note;
+    const c=d.querySelector("input");c.checked=!!seen[id];
+    c.addEventListener("change",()=>{if(c.checked)seen[id]=1;else delete seen[id];d.classList.toggle("done",c.checked);save();upd()});
+    list.appendChild(d);
+  }
+}
+function upd(){const n=Object.keys(seen).length;document.getElementById("count").textContent=n;document.getElementById("total").textContent=total;document.getElementById("bar").style.width=(100*n/total)+"%"}
+upd();
+</script>
+<script>
+if ("serviceWorker" in navigator) { window.addEventListener("load", function(){ navigator.serviceWorker.register("sw.js").catch(function(){}); }); }
+</script></body>
+</html>
