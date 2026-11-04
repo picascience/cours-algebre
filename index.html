@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Algèbre 1 — Cours expliqué en détail (chapitres 1 et 2)</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],throwOnError:false});"></script>
+<style>
+  :root{--ink:#1d1d1f;--muted:#5b5b66;--bg:#fbfaf7;--line:#e3e0d8;
+        --def:#2f5fb3;--thm:#2e7d4f;--piege:#b3261e;--astuce:#a86b00;--demo:#555;--coeur:#6a3fb5;}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.65 Georgia,"Times New Roman",serif}
+  main{max-width:860px;margin:0 auto;padding:32px 22px 120px}
+  h1{font-size:2rem;line-height:1.2;margin:.2em 0 .3em}
+  h2{font-size:1.55rem;margin:2.6em 0 .6em;padding-top:.6em;border-top:3px solid var(--ink)}
+  h3{font-size:1.22rem;margin:2em 0 .5em;color:#222}
+  h4{font-size:1.05rem;margin:1.4em 0 .4em}
+  p{margin:.6em 0}
+  .sub{color:var(--muted);font-style:italic}
+  nav.toc{background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px 22px;margin:20px 0}
+  nav.toc ol{margin:.3em 0;padding-left:1.3em} nav.toc li{margin:.15em 0}
+  a{color:var(--def)}
+  .box{border-left:5px solid;border-radius:6px;padding:10px 16px;margin:14px 0;background:#fff}
+  .box>.t{font-family:Arial,Helvetica,sans-serif;font-weight:700;font-size:.82rem;letter-spacing:.04em;text-transform:uppercase;margin-bottom:4px}
+  .def{border-color:var(--def)} .def>.t{color:var(--def)}
+  .thm{border-color:var(--thm)} .thm>.t{color:var(--thm)}
+  .piege{border-color:var(--piege);background:#fff6f5} .piege>.t{color:var(--piege)}
+  .astuce{border-color:var(--astuce);background:#fffaf0} .astuce>.t{color:var(--astuce)}
+  .demo{border-color:#999;background:#f6f6f4} .demo>.t{color:var(--demo)}
+  .coeur{border-color:var(--coeur);background:#f8f4ff} .coeur>.t{color:var(--coeur)}
+  .ex{border-color:#333;background:#fff}.ex>.t{color:#333}
+  details{background:#fff;border:1px dashed #aaa;border-radius:8px;padding:8px 14px;margin:10px 0}
+  details summary{cursor:pointer;font-family:Arial,Helvetica,sans-serif;font-weight:600;color:#333}
+  details[open] summary{margin-bottom:6px}
+  table{border-collapse:collapse;margin:12px 0;width:100%;background:#fff}
+  th,td{border:1px solid var(--line);padding:7px 10px;text-align:left;vertical-align:top}
+  th{background:#f1efe9;font-family:Arial,Helvetica,sans-serif;font-size:.9rem}
+  code{background:#eee;padding:1px 4px;border-radius:3px}
+  .step{font-family:Arial,Helvetica,sans-serif;font-weight:700;color:#444}
+  ul,ol{padding-left:1.4em} li{margin:.2em 0}
+  .katex-display{overflow-x:auto;overflow-y:hidden;padding:2px 0}
+  .tag{display:inline-block;font:600 .75rem Arial,sans-serif;background:#eee;border-radius:4px;padding:1px 6px;margin-right:4px}
+  hr{border:0;border-top:1px solid var(--line);margin:28px 0}
+</style>
+</head>
+<body>
+<main>
+
+<h1>Algèbre 1 — le cours expliqué depuis zéro</h1>
+<p class="sub">Chapitre 1 (Applications) et chapitre 2 (Relations, ensembles finis, dénombrement), c'est-à-dire tout le poly jusqu'à la page 31 (fin des exercices du chapitre 2). Les numéros (Déf 1.29, Prop 2.36…) sont ceux de ton poly, pour que tu puisses aller voir.</p>
+
+<div class="box astuce"><div class="t">Comment utiliser ce document</div>
+<ul>
+<li><b>Lis dans l'ordre.</b> Chaque partie s'appuie sur la précédente. La partie 0 (logique et ensembles) est courte mais <b>indispensable</b> : c'est elle qui fait que les démonstrations deviennent « évidentes ».</li>
+<li>Les encadrés de couleur :
+ <span class="tag" style="color:var(--def)">Définition</span> à connaître mot pour mot ;
+ <span class="tag" style="color:var(--thm)">Théorème/Propriété</span> ;
+ <span class="tag" style="color:var(--piege)">Piège</span> ce qui fait perdre des points ;
+ <span class="tag" style="color:var(--coeur)">Par cœur</span> ;
+ <span class="tag">Démonstration</span> expliquée plusieurs fois.</li>
+<li>Les corrections des exercices sont <b>cachées</b> (clique pour ouvrir). Essaie d'abord 5 minutes, même si tu bloques : c'est comme ça qu'on retient.</li>
+<li>Les partiels de 2022, 2023 et 2024 que tu as dans le dossier tombent <b>surtout</b> sur : image directe/réciproque, injectivité/surjectivité/bijectivité, $f\circ f = \mathrm{id}$, relations d'équivalence et classes. Ce sont les parties où j'insiste le plus.</li>
+</ul></div>
+
+<nav class="toc"><b>Sommaire</b>
+<ol start="0">
+<li><a href="#p0">Avant tout : le langage (quantificateurs, ensembles, comment rédiger)</a></li>
+<li><a href="#c1">Chapitre 1 — Applications</a>
+ <ol>
+ <li><a href="#c1-1">Application, image, antécédent, graphe</a></li>
+ <li><a href="#c1-2">Identité, fonction indicatrice</a></li>
+ <li><a href="#c1-3">Restriction, co-restriction, prolongement</a></li>
+ <li><a href="#c1-4">Composée</a></li>
+ <li><a href="#c1-5">Image directe $f(A)$</a></li>
+ <li><a href="#c1-6">Image réciproque $f^{-1}(B)$</a></li>
+ <li><a href="#c1-7">Injectivité</a></li>
+ <li><a href="#c1-8">Surjectivité</a></li>
+ <li><a href="#c1-9">Bijectivité, bijection réciproque, involution</a></li>
+ <li><a href="#c1-ex">Exercices corrigés du chapitre 1</a></li>
+ </ol></li>
+<li><a href="#c2">Chapitre 2 — Relations, ensembles finis, dénombrement</a>
+ <ol>
+ <li><a href="#c2-1">Relations binaires et leurs 4 propriétés</a></li>
+ <li><a href="#c2-2">Relations d'ordre, relations d'équivalence</a></li>
+ <li><a href="#c2-3">Partitions et classes d'équivalence</a></li>
+ <li><a href="#c2-4">Équipotent, dénombrable, fini, cardinal</a></li>
+ <li><a href="#c2-5">Principe de la somme, formule de Poincaré</a></li>
+ <li><a href="#c2-6">Principe du produit</a></li>
+ <li><a href="#c2-7">Applications entre ensembles finis</a></li>
+ <li><a href="#c2-8">Dénombrement : listes, arrangements, permutations, combinaisons</a></li>
+ <li><a href="#c2-ex">Exercices corrigés du chapitre 2</a></li>
+ </ol></li>
+<li><a href="#fiche">Fiche « par cœur » + liste des pièges + plan de révision</a></li>
+</ol></nav>
+
+<!-- ===================================================== -->
+<h2 id="p0">0. Avant tout : le langage</h2>
+
+<p>Si tu n'as rien compris en visio, c'est très probablement parce que le cours utilise un <b>langage</b> (symboles, façon de rédiger) qu'on ne t'a jamais vraiment expliqué. Une fois ce langage compris, 80 % des démonstrations du chapitre 1 deviennent mécaniques. Prends 20 minutes ici.</p>
+
+<h3>0.1 Les symboles</h3>
+<table>
+<tr><th>Symbole</th><th>Se lit</th><th>Exemple</th></tr>
+<tr><td>$\forall$</td><td>« pour tout »</td><td>$\forall x\in\mathbb R,\ x^2\ge 0$ : tout réel a un carré positif.</td></tr>
+<tr><td>$\exists$</td><td>« il existe (au moins un) »</td><td>$\exists x\in\mathbb R,\ x^2=4$ : il existe un réel de carré 4 (il y en a même deux).</td></tr>
+<tr><td>$\exists!$</td><td>« il existe un unique »</td><td>$\exists! x\in\mathbb R_+,\ x^2=4$ (c'est $x=2$).</td></tr>
+<tr><td>$\in$</td><td>« appartient à » (un <i>élément</i> dans un <i>ensemble</i>)</td><td>$2\in\mathbb N$</td></tr>
+<tr><td>$\subset$</td><td>« est inclus dans » (un <i>ensemble</i> dans un <i>ensemble</i>)</td><td>$\{1,2\}\subset\{1,2,3\}$</td></tr>
+<tr><td>$\Rightarrow$</td><td>« implique », « si… alors… »</td><td>$x=2\Rightarrow x^2=4$</td></tr>
+<tr><td>$\Leftrightarrow$</td><td>« équivaut à », « si et seulement si » (ssi)</td><td>$x^2=4\Leftrightarrow (x=2 \text{ ou } x=-2)$</td></tr>
+<tr><td>$[\![1,n]\!]$</td><td>les entiers de 1 à $n$</td><td>$[\![1,4]\!]=\{1,2,3,4\}$</td></tr>
+</table>
+
+<div class="box piege"><div class="t">Piège n°1 du semestre : $\in$ contre $\subset$</div>
+<p>$2\in\{1,2,3\}$ ✔ mais $2\subset\{1,2,3\}$ ✘ (2 n'est pas un ensemble). On écrit $\{2\}\subset\{1,2,3\}$.<br>
+Retiens : <b>$\in$ entre un élément et un ensemble</b>, <b>$\subset$ entre deux ensembles</b>. Les correcteurs enlèvent des points pour ça, et en plus ça montre qu'on confond $f(x)$ (un élément) et $f(A)$ (un ensemble).</p></div>
+
+<h3>0.2 L'ordre des quantificateurs compte</h3>
+<p>$\forall y\in\mathbb R,\ \exists x\in\mathbb R,\ x>y$ : « pour chaque $y$, je peux trouver un $x$ plus grand » (VRAI : prends $x=y+1$, le $x$ dépend de $y$).<br>
+$\exists x\in\mathbb R,\ \forall y\in\mathbb R,\ x>y$ : « il y a un réel plus grand que tous les réels » (FAUX).</p>
+<p>Dans « $\forall y,\ \exists x$ », <b>$x$ a le droit de dépendre de $y$</b>. C'est exactement la forme de la surjectivité, donc c'est important.</p>
+
+<h3>0.3 Nier une phrase (pour les contre-exemples)</h3>
+<p>La négation échange $\forall$ et $\exists$ :</p>
+<ul>
+<li>non$(\forall x,\ P(x))$ = $\exists x,\ $non$P(x)$. Pour montrer qu'un « pour tout » est faux, <b>un seul contre-exemple suffit</b>.</li>
+<li>non$(\exists x,\ P(x))$ = $\forall x,\ $non$P(x)$.</li>
+<li>non$(P \text{ et } Q)$ = (non$P$) ou (non$Q$) ; non$(P\text{ ou }Q)$ = (non$P$) et (non$Q$).</li>
+<li>non$(P\Rightarrow Q)$ = $P$ et non$Q$.</li>
+</ul>
+
+<h3>0.4 Ensembles : ce qu'il faut savoir</h3>
+<ul>
+<li><b>Intersection</b> $A\cap B$ : éléments dans $A$ <b>et</b> dans $B$. <b>Réunion</b> $A\cup B$ : dans $A$ <b>ou</b> dans $B$ (ou les deux).</li>
+<li><b>Différence</b> $A\setminus B$ : dans $A$ mais pas dans $B$. <b>Complémentaire</b> de $A$ dans $E$ : $\overline A = E\setminus A$.</li>
+<li><b>Produit cartésien</b> $E\times F=\{(x,y)\ /\ x\in E,\ y\in F\}$ : l'ensemble des <b>couples</b>. Dans un couple l'ordre compte : $(1,2)\ne(2,1)$. Alors que pour un ensemble $\{1,2\}=\{2,1\}$.</li>
+<li><b>Ensemble des parties</b> $\mathcal P(E)$ : l'ensemble de <b>tous</b> les sous-ensembles de $E$. Ex : $\mathcal P(\{a,b\})=\{\emptyset,\{a\},\{b\},\{a,b\}\}$. Attention : $A\subset E \Leftrightarrow A\in\mathcal P(E)$.</li>
+<li>$\emptyset$ est inclus dans tout ensemble.</li>
+</ul>
+
+<h3>0.5 Les 4 techniques de démonstration du semestre</h3>
+
+<div class="box coeur"><div class="t">Technique 1 — Montrer une inclusion $A\subset B$</div>
+<p>On écrit <b>toujours</b> :</p>
+<p>« <i>Soit $x\in A$.</i> [… on utilise la définition de $A$ pour dire ce que ça veut dire …] <i>Donc $x\in B$. Ceci étant vrai pour tout $x\in A$, on a $A\subset B$.</i> »</p>
+<p>« Soit $x\in A$ » veut dire : « je prends un élément de $A$ <b>quelconque</b>, je ne choisis pas lequel ». Si je montre qu'il est dans $B$ sans rien supposer d'autre, ça marche pour tous.</p></div>
+
+<div class="box coeur"><div class="t">Technique 2 — Montrer une égalité d'ensembles $A=B$</div>
+<p>Soit par <b>double inclusion</b> : on montre $A\subset B$ <b>puis</b> $B\subset A$.<br>
+Soit par <b>équivalences</b> : $x\in A\Leftrightarrow\dots\Leftrightarrow\dots\Leftrightarrow x\in B$ (à condition que chaque flèche marche dans les deux sens ! Si tu as un doute, fais la double inclusion).</p></div>
+
+<div class="box coeur"><div class="t">Technique 3 — Montrer « $\forall x,\ P(x)\Rightarrow Q(x)$ »</div>
+<p>« <i>Soit $x$ tel que $P(x)$.</i> […] <i>donc $Q(x)$.</i> » On <b>suppose</b> $P(x)$ et on arrive à $Q(x)$.<br>
+Variante, la <b>contraposée</b> : $P\Rightarrow Q$ est équivalent à non$Q\Rightarrow$ non$P$. (Ex : « s'il pleut, le sol est mouillé » ⟺ « si le sol n'est pas mouillé, il ne pleut pas ».)</p></div>
+
+<div class="box coeur"><div class="t">Technique 4 — Montrer qu'un énoncé « pour tout » est FAUX</div>
+<p>Donner <b>un contre-exemple explicite avec des nombres</b>. « $\sin$ n'est pas injective car $\sin(0)=\sin(\pi)=0$ alors que $0\ne\pi$. » C'est tout. Pas besoin de plus.</p></div>
+
+<!-- ===================================================== -->
+<h2 id="c1">Chapitre 1 — Applications</h2>
+
+<h3 id="c1-1">1.1 Application, image, antécédent, graphe</h3>
+
+<div class="box def"><div class="t">Définition 1.1 — Application</div>
+<p>Soient $E$ et $F$ deux ensembles. Une <b>application</b> $f$ de $E$ dans $F$ associe à <b>chaque</b> élément $x$ de $E$ <b>un et un seul</b> élément $f(x)$ de $F$. On note $f:E\to F$.</p>
+<ul><li>$E$ = ensemble de <b>départ</b>, $F$ = ensemble d'<b>arrivée</b>.</li>
+<li>$f(x)$ est l'<b>image</b> de $x$.</li>
+<li>Si $y=f(x)$, on dit que $x$ est <b>un antécédent</b> de $y$.</li>
+<li>$\mathcal F(E,F)$ = ensemble de toutes les applications de $E$ dans $F$.</li></ul></div>
+
+<p><b>En clair</b> : une application, c'est une machine. Tu mets un $x$ de $E$, il sort <b>exactement un</b> résultat, qui est dans $F$. Deux règles :</p>
+<ol>
+<li><b>Tout</b> élément de $E$ a une image (pas de « trou » au départ).</li>
+<li>Chaque élément a <b>une seule</b> image.</li>
+</ol>
+<p>En revanche, du côté de l'arrivée, <b>rien n'est imposé</b> : un $y$ de $F$ peut avoir 0, 1 ou plusieurs antécédents. Exemple avec $f:\mathbb R\to\mathbb R,\ x\mapsto x^2$ : $-3$ a 0 antécédent, $0$ en a 1 (c'est 0), $4$ en a 2 ($2$ et $-2$). Tout le chapitre consiste à étudier ce nombre d'antécédents.</p>
+
+<div class="box piege"><div class="t">Piège : une application, c'est aussi son départ et son arrivée</div>
+<p>$x\mapsto x^2$ de $\mathbb R$ dans $\mathbb R$, de $\mathbb R_+$ dans $\mathbb R$, de $\mathbb R$ dans $\mathbb R_+$… ce sont <b>des applications différentes</b>, qui n'ont pas les mêmes propriétés (on le verra : l'une est injective, l'autre surjective…). Toujours regarder <b>$E$ et $F$</b> avant de répondre.</p>
+<p>Aussi : $x\mapsto \frac1x$ <b>n'est pas</b> une application de $\mathbb R$ dans $\mathbb R$ (0 n'a pas d'image). C'en est une de $\mathbb R^*$ dans $\mathbb R$.</p></div>
+
+<p><b>Graphe</b> : $\Gamma=\{(x,y)\in E\times F\ /\ y=f(x)\}$ = l'ensemble des couples $(x,f(x))$. Pour une fonction de $\mathbb R$ dans $\mathbb R$, c'est la courbe que tu dessines depuis le lycée.</p>
+
+<p><b>Exemples du poly</b> (1.3 à 1.5) : le départ ou l'arrivée peut être $\mathbb R^2$ (des couples).</p>
+<ul>
+<li>$f:\mathbb R^2\to\mathbb R,\ (x,y)\mapsto x^2-3y+1$ : on rentre un couple, il sort un réel. $f(1,2)=1-6+1=-4$.</li>
+<li>$f:\mathbb N\to\mathbb R^2,\ n\mapsto(\sqrt n, e^n)$ : on rentre un entier, il sort un couple.</li>
+<li>Le produit scalaire $(u,v)\mapsto u\cdot v=u_1v_1+u_2v_2$ va de $\mathbb R^2\times\mathbb R^2$ dans $\mathbb R$.</li>
+</ul>
+
+<h3 id="c1-2">1.2 Deux applications à connaître</h3>
+<div class="box def"><div class="t">Déf 1.6 — Identité</div>
+<p>$\mathrm{id}_E:E\to E,\ x\mapsto x$. Elle ne « fait rien ». Son graphe est la diagonale $\{(x,x)\}$.</p></div>
+<div class="box def"><div class="t">Déf 1.7 — Fonction indicatrice d'une partie $A\subset E$</div>
+<p>$\mathbb 1_A:E\to\{0,1\}$, $\mathbb 1_A(x)=1$ si $x\in A$, $\mathbb 1_A(x)=0$ si $x\notin A$.</p>
+<p>C'est un « détecteur » : elle répond 1 (oui) si $x$ est dans $A$, 0 (non) sinon. $\mathbb 1_\emptyset$ vaut toujours 0, $\mathbb 1_E$ vaut toujours 1.</p></div>
+<p>On la reverra au chapitre 2 pour montrer que $\mathrm{Card}\,\mathcal P(E)=2^n$ (une partie = une suite de oui/non).</p>
+
+<h3 id="c1-3">1.3 Restriction, co-restriction, prolongement</h3>
+<p>Ce sont trois façons de <b>modifier l'ensemble de départ ou d'arrivée</b> sans toucher à la formule.</p>
+
+<div class="box def"><div class="t">Déf 1.8 — Restriction à $A\subset E$</div>
+<p>$f_{|A}:A\to F,\ x\mapsto f(x)$. On <b>réduit le départ</b>.</p></div>
+<p>Exemple 1.9 : $f:\mathbb R^*\to\mathbb R,\ x\mapsto \frac{5x}{|x|}$ vaut $5$ si $x>0$ et $-5$ si $x\lt 0$. Elle n'est pas constante, mais sa restriction à $\mathbb R_+^*$ est constante égale à 5.</p>
+
+<div class="box def"><div class="t">Déf 1.10 — Co-restriction à $B\subset F$</div>
+<p>Si <b>toutes</b> les images tombent dans $B$ (c'est-à-dire $\forall x\in E,\ f(x)\in B$), on peut définir $f^{|B}:E\to B,\ x\mapsto f(x)$. On <b>réduit l'arrivée</b>.</p></div>
+<p class="sub">(Petite coquille dans le poly : il est écrit « $f(x)\subset B$ », il faut lire « $f(x)\in B$ » — $f(x)$ est un élément !)</p>
+<p>Exemple 1.11 : $x\mapsto x^6$ ne prend que des valeurs $\ge0$, donc on peut la voir comme $g:\mathbb R\to\mathbb R_+$. Pour $f$ (arrivée $\mathbb R$), $-1$ n'a pas d'antécédent ; pour $g$ (arrivée $\mathbb R_+$), tout le monde en a un. Même formule, propriétés différentes.</p>
+
+<div class="box def"><div class="t">Déf 1.12 — Prolongement</div>
+<p>Si $E\subset\Omega$, une application $g:\Omega\to F$ <b>prolonge</b> $f$ si $g_{|E}=f$, c'est-à-dire $g(x)=f(x)$ pour tout $x\in E$. On <b>agrandit le départ</b> en gardant les mêmes valeurs là où $f$ était déjà définie.</p></div>
+<p>Exemple 1.13 : $x\mapsto x^\pi=e^{\pi\ln x}$ n'est définie que sur $\mathbb R_+^*$. On la prolonge à $\mathbb R$ en posant $g(0)=0$ et $g(x)=e^{\pi\ln|x|}$ pour $x\ne0$. Sur $\mathbb R_+^*$, $|x|=x$ donc $g=f$ : c'est bien un prolongement. (Il y a plein d'autres prolongements possibles : on a choisi les valeurs en dehors de $E$ comme on voulait.)</p>
+
+<h3 id="c1-4">1.4 Composée de deux applications</h3>
+
+<div class="box def"><div class="t">Déf 1.14 — Composée</div>
+<p>Si $f:E\to F$ et $g:F'\to G$ avec <b>$F\subset F'$</b> (tout ce qui sort de $f$ peut rentrer dans $g$), on définit
+$$g\circ f:E\to G,\quad x\mapsto g(f(x)).$$</p></div>
+
+<div class="box piege"><div class="t">Deux pièges classiques</div>
+<ol>
+<li><b>$g\circ f$ se lit de droite à gauche</b> : on fait <b>d'abord $f$, puis $g$</b>. « $g$ rond $f$ » = « $g$ après $f$ ».</li>
+<li><b>Il faut vérifier que la composée existe</b> : l'arrivée de $f$ doit être incluse dans le départ de $g$. Sinon, la composée n'est pas définie.</li>
+</ol></div>
+
+<p><b>Exemple 1.15</b> : $f(x)=x^2$, $g(x)=\sin x$, toutes deux de $\mathbb R$ dans $\mathbb R$.<br>
+$(f\circ g)(x)=f(g(x))=f(\sin x)=(\sin x)^2$ ; $(g\circ f)(x)=g(f(x))=g(x^2)=\sin(x^2)$.<br>
+Pour $x=\pi$ : $(f\circ g)(\pi)=0$ mais $(g\circ f)(\pi)=\sin(\pi^2)\ne0$. Donc <b>$f\circ g\ne g\circ f$ en général</b>.</p>
+
+<p><b>Exemple 1.16</b> : $f:\mathbb R\to\mathbb R,\ x\mapsto x^2-3x+1$ et $g:\mathbb R_+^*\to\mathbb R,\ x\mapsto\ln x$.</p>
+<ul>
+<li>$f\circ g$ : $g$ arrive dans $\mathbb R$, et $f$ part de $\mathbb R$ ✔. Donc $f\circ g:\mathbb R_+^*\to\mathbb R$, $(f\circ g)(x)=(\ln x)^2-3\ln x+1$.</li>
+<li>$g\circ f$ : $f$ arrive dans $\mathbb R$, mais $g$ ne part que de $\mathbb R_+^*$ ✘. Concrètement $f(1)=1-3+1=-1$ et $\ln(-1)$ n'existe pas. Donc $g\circ f$ n'est pas définie (de $\mathbb R$ dans $\mathbb R$).</li>
+</ul>
+
+<p><b>Règles</b> : $\mathrm{id}_F\circ f=f$ et $f\circ\mathrm{id}_E=f$ (l'identité ne change rien). On note $f^2=f\circ f$, $f^3=f\circ f\circ f$… (<b>attention</b> : $f^2(x)=f(f(x))$, pas $(f(x))^2$ !)</p>
+
+<div class="box thm"><div class="t">Prop 1.18 — Associativité</div>
+<p>$h\circ(g\circ f)=(h\circ g)\circ f$. On peut donc écrire $h\circ g\circ f$ sans parenthèses.</p></div>
+<div class="box demo"><div class="t">Démonstration expliquée</div>
+<p><b>Comment montre-t-on que deux applications sont égales ?</b> Il faut : même départ, même arrivée, et même image pour <b>chaque</b> $x$.</p>
+<p>Ici les deux vont de $E$ dans $H$. Soit $x\in E$.<br>
+$[h\circ(g\circ f)](x)=h\big((g\circ f)(x)\big)=h\big(g(f(x))\big)$.<br>
+$[(h\circ g)\circ f](x)=(h\circ g)\big(f(x)\big)=h\big(g(f(x))\big)$.<br>
+C'est pareil. Fin.</p>
+<p><b>Avec des mots</b> : dans les deux cas on fait $f$, puis $g$, puis $h$. Les parenthèses disent juste comment on « emballe » les étapes, pas l'ordre.</p></div>
+
+<h3 id="c1-5">1.5 Image directe d'une partie : $f(A)$</h3>
+
+<div class="box def"><div class="t">Déf 1.19 — Image directe</div>
+<p>Pour $A\subset E$ : $\displaystyle f(A)=\{y\in F\ /\ \exists x\in A,\ y=f(x)\}=\{f(x),\ x\in A\}.$</p>
+<p><b>À savoir par cœur sous cette forme :</b> $$y\in f(A)\iff \exists x\in A,\ y=f(x).$$</p></div>
+
+<p><b>En clair</b> : $f(A)$ est l'ensemble de tout ce qui « sort » quand on rentre les éléments de $A$. C'est une <b>partie de $F$</b> (un ensemble), à ne pas confondre avec $f(x)$ qui est un <b>élément</b> de $F$.</p>
+
+<p><b>Exemples (1.20)</b> avec $f(x)=x^2$ sur $\mathbb R$ :</p>
+<ul>
+<li>$f([2,3])=[4,9]$ (sur $[2,3]$, $x^2$ croît de 4 à 9).</li>
+<li>$f([-4,1])=[0,16]$. <b>Pourquoi pas $[1,16]$ ?</b> Parce que $0\in[-4,1]$ et $f(0)=0$. Sur $[-4,0]$, $x^2$ décroît de 16 à 0 ; sur $[0,1]$, il croît de 0 à 1. Donc on obtient tout $[0,16]$.</li>
+<li>$f([-1,1])=[0,1]$, $f(\mathbb R)=\mathbb R_+$.</li>
+</ul>
+
+<div class="box piege"><div class="t">Piège : $f([a,b])\ne[f(a),f(b)]$ en général</div>
+<p>Ce n'est vrai que si $f$ est croissante (et continue). Avec $x^2$ : $[f(-4),f(1)]=[16,1]$, ça n'a aucun sens. Fais toujours un petit tableau de variations au brouillon (sauf si l'énoncé l'interdit, comme au partiel 2024 : il faut alors raisonner avec des inégalités et la double inclusion).</p></div>
+
+<p>Deux remarques évidentes mais utiles : $f(E)\subset F$ toujours ; et si $x\in A$ alors $f(x)\in f(A)$.</p>
+
+<div class="box thm"><div class="t">Prop 1.22 — L'image directe respecte l'inclusion</div>
+<p>$A\subset C\Longrightarrow f(A)\subset f(C)$.</p></div>
+<div class="box demo"><div class="t">Démonstration — version rédigée</div>
+<p>Supposons $A\subset C$. Soit $y\in f(A)$. Par définition, il existe $x\in A$ tel que $y=f(x)$. Comme $A\subset C$, ce $x$ est aussi dans $C$. Donc $y=f(x)$ avec $x\in C$ : c'est exactement dire $y\in f(C)$. D'où $f(A)\subset f(C)$.</p>
+<p><b>Version « avec des mots »</b> : si $y$ est fabriqué à partir d'un élément de $A$, cet élément est aussi un élément de $C$ (puisque $A$ est dedans), donc $y$ est fabriqué à partir d'un élément de $C$.</p>
+<p><b>Le schéma à retenir</b> (il sert partout) : <i>« Soit $y\in f(A)$ ; alors il existe $x\in A$ tel que $y=f(x)$ »</i>. On « déplie » la définition, on travaille sur $x$, puis on « replie ».</p></div>
+
+<h4>Comportement avec $\cap$ et $\cup$ (Exercice 1.6 — très classique)</h4>
+<div class="box thm"><div class="t">À retenir</div>
+<p>$f(A\cup C)=f(A)\cup f(C)$ (égalité) &nbsp;&nbsp;mais&nbsp;&nbsp; $f(A\cap C)\subset f(A)\cap f(C)$ (seulement une inclusion !).</p></div>
+<details><summary>Démonstration de $f(A\cap C)\subset f(A)\cap f(C)$ et contre-exemple</summary>
+<p>Soit $y\in f(A\cap C)$. Il existe $x\in A\cap C$ tel que $y=f(x)$. Comme $x\in A$, $y=f(x)\in f(A)$. Comme $x\in C$, $y\in f(C)$. Donc $y\in f(A)\cap f(C)$.</p>
+<p><b>Pourquoi pas l'égalité ?</b> Si $y\in f(A)\cap f(C)$, on a $y=f(a)$ avec $a\in A$ et $y=f(c)$ avec $c\in C$, mais <b>rien ne dit que $a=c$</b>. Contre-exemple avec $f(x)=x^2$, $A=\{-1\}$, $C=\{1\}$ : $A\cap C=\emptyset$ donc $f(A\cap C)=\emptyset$, mais $f(A)\cap f(C)=\{1\}\cap\{1\}=\{1\}$.</p>
+<p>(Si $f$ est injective, alors $a=c$ et on a l'égalité.)</p></details>
+<details><summary>Démonstration de $f(A\cup C)=f(A)\cup f(C)$</summary>
+<p>$\subset$ : soit $y\in f(A\cup C)$, $y=f(x)$ avec $x\in A\cup C$. Si $x\in A$, $y\in f(A)$ ; si $x\in C$, $y\in f(C)$. Dans les deux cas $y\in f(A)\cup f(C)$.</p>
+<p>$\supset$ : $A\subset A\cup C$ donc (Prop 1.22) $f(A)\subset f(A\cup C)$. De même $f(C)\subset f(A\cup C)$. Donc $f(A)\cup f(C)\subset f(A\cup C)$.</p></details>
+
+<h3 id="c1-6">1.6 Image réciproque d'une partie : $f^{-1}(B)$</h3>
+
+<div class="box def"><div class="t">Déf 1.23 — Image réciproque</div>
+<p>Pour $B\subset F$ : $\displaystyle f^{-1}(B)=\{x\in E\ /\ f(x)\in B\}$. C'est une partie de $E$ : l'ensemble de <b>tous les antécédents</b> des éléments de $B$.</p>
+<p><b>Par cœur :</b> $$x\in f^{-1}(B)\iff f(x)\in B.$$</p></div>
+
+<p><b>En clair</b> : $f^{-1}(B)$ répond à la question « quels $x$ envoient dans $B$ ? ». C'est la résolution de l'équation/inéquation « $f(x)\in B$ ».</p>
+
+<div class="box piege"><div class="t">LE piège du chapitre : la notation $f^{-1}(B)$ existe TOUJOURS</div>
+<p>Même si $f$ n'est pas bijective. $f^{-1}(B)$ (avec $B$ un <b>ensemble</b>) est un ensemble, toujours défini. En revanche $f^{-1}(y)$ (avec $y$ un <b>élément</b>) n'a de sens que si $f$ est bijective (c'est alors la bijection réciproque). Si $f$ n'est pas bijective, on écrit $f^{-1}(\{y\})$ avec des accolades.</p></div>
+
+<p><b>Exemples (1.25)</b>, $f(x)=x^2$ :</p>
+<ul>
+<li>$f^{-1}([2,3])$ : on résout $2\le x^2\le3 \iff \sqrt2\le|x|\le\sqrt3$. Donc $[-\sqrt3,-\sqrt2]\cup[\sqrt2,\sqrt3]$. (N'oublie pas les négatifs !)</li>
+<li>$f^{-1}([-1,9])$ : $-1\le x^2\le 9 \iff x^2\le9\iff -3\le x\le3$. Donc $[-3,3]$.</li>
+<li>$f^{-1}([0,4])=[-2,2]$ ; $f^{-1}(\{1\})=\{-1,1\}$.</li>
+<li>$f^{-1}(\{-3\})=\emptyset$ (aucun carré ne vaut $-3$). <i>(Le poly écrit $[-2,-3]$, qui est d'ailleurs déjà vide.)</i> Une image réciproque peut être vide, ce n'est pas une erreur.</li>
+</ul>
+
+<div class="box thm"><div class="t">Prop 1.26 — respecte l'inclusion</div><p>$B\subset C\Longrightarrow f^{-1}(B)\subset f^{-1}(C)$.</p></div>
+<div class="box demo"><div class="t">Démonstration</div>
+<p>Soit $x\in f^{-1}(B)$. Alors $f(x)\in B$. Comme $B\subset C$, $f(x)\in C$, c'est-à-dire $x\in f^{-1}(C)$.</p>
+<p>Remarque : c'est encore plus simple que pour l'image directe, parce que la définition de $f^{-1}(B)$ n'a pas de « il existe ». <b>L'image réciproque est toujours plus facile à manipuler.</b></p></div>
+
+<h4>L'image réciproque se comporte parfaitement (Exercice 1.8)</h4>
+<div class="box thm"><div class="t">À retenir</div>
+<p>$f^{-1}(B\cap D)=f^{-1}(B)\cap f^{-1}(D)$ et $f^{-1}(B\cup D)=f^{-1}(B)\cup f^{-1}(D)$ (égalités !).</p></div>
+<details><summary>Démonstration (par équivalences)</summary>
+<p>$x\in f^{-1}(B\cap D)\iff f(x)\in B\cap D\iff (f(x)\in B \text{ et } f(x)\in D)\iff(x\in f^{-1}(B)\text{ et }x\in f^{-1}(D))\iff x\in f^{-1}(B)\cap f^{-1}(D)$.</p>
+<p>Même chose avec « ou » pour la réunion. Chaque flèche est une équivalence car on ne fait que réécrire des définitions.</p></details>
+
+<div class="box thm"><div class="t">Prop 1.27 — Aller-retour</div>
+<p>Pour $A\subset E$ et $B\subset F$ : $$A\subset f^{-1}(f(A))\qquad\text{et}\qquad f(f^{-1}(B))\subset B.$$</p></div>
+<div class="box demo"><div class="t">Démonstration expliquée</div>
+<p><b>1) $A\subset f^{-1}(f(A))$.</b> Soit $x\in A$. Alors $f(x)\in f(A)$ (remarque évidente). Or « $f(x)\in f(A)$ » veut dire, par définition de l'image réciproque, « $x\in f^{-1}(f(A))$ ». Fini.</p>
+<p><b>2) $f(f^{-1}(B))\subset B$.</b> Soit $y\in f(f^{-1}(B))$. Par définition de l'image directe, il existe $x\in f^{-1}(B)$ tel que $y=f(x)$. Or $x\in f^{-1}(B)$ veut dire $f(x)\in B$. Donc $y=f(x)\in B$.</p>
+<p><b>Pourquoi seulement des inclusions ? Exemple 1.28</b> avec $x^2$ :<br>
+• $A=[0,1]$ : $f(A)=[0,1]$, puis $f^{-1}([0,1])=[-1,1]$. On récupère plus que $A$ (les négatifs, qui ont la même image). C'est un défaut d'<b>injectivité</b>.<br>
+• $B=[-1,1]$ : $f^{-1}(B)=[-1,1]$, puis $f([-1,1])=[0,1]$. On a perdu $[-1,0[$, qui n'est atteint par personne. C'est un défaut de <b>surjectivité</b>.<br>
+Et justement : on a égalité pour tout $A$ ⟺ $f$ injective, égalité pour tout $B$ ⟺ $f$ surjective (exercice 1.19, tombé au partiel 2022, corrigé plus bas).</p></div>
+
+<h3 id="c1-7">1.7 Injectivité</h3>
+
+<div class="box def"><div class="t">Déf 1.29 — Injection</div>
+<p>$f:E\to F$ est <b>injective</b> si tout élément de $F$ a <b>au plus un</b> antécédent (0 ou 1, jamais 2).</p></div>
+<div class="box coeur"><div class="t">Prop 1.30 — La caractérisation à utiliser en pratique (PAR CŒUR)</div>
+<p>$$f \text{ injective}\iff \forall x,x'\in E,\quad f(x)=f(x')\Longrightarrow x=x'.$$
+Contraposée (Rem. 1.31) : $\forall x,x'\in E,\ x\ne x'\Longrightarrow f(x)\ne f(x')$.</p>
+<p>« Deux éléments qui ont la même image sont forcément le même élément. » / « Deux éléments différents ont des images différentes. »</p></div>
+
+<p><b>Pourquoi c'est la même chose que « au plus un antécédent » ?</b> Si $y$ avait deux antécédents différents $x\ne x'$, on aurait $f(x)=y=f(x')$ avec $x\ne x'$, ce que la propriété interdit. Et réciproquement.</p>
+
+<div class="box coeur"><div class="t">Méthode — Montrer que $f$ est injective (rédaction type)</div>
+<p>« <i>Soient $x,x'\in E$ tels que $f(x)=f(x')$.</i> [calcul] <i>… donc $x=x'$. Donc $f$ est injective.</i> »</p>
+<p>Exemple 1.33, $f:\mathbb R^*\to\mathbb R$, $x\mapsto\frac1x$ : soient $x,x'\in\mathbb R^*$ tels que $\frac1x=\frac1{x'}$. En passant à l'inverse, $x=x'$. Donc $f$ est injective.</p>
+<p>Autre exemple : $f(x)=3x+1$. Si $3x+1=3x'+1$ alors $3x=3x'$ donc $x=x'$. Injective.</p></div>
+
+<div class="box coeur"><div class="t">Méthode — Montrer que $f$ N'est PAS injective</div>
+<p>Trouver <b>deux éléments distincts qui ont la même image</b>, avec des valeurs explicites.</p>
+<p>Exemple 1.34 : $\sin(0)=\sin(2\pi)=0$ et $0\ne2\pi$, donc $\sin$ n'est pas injective sur $\mathbb R$. &nbsp; $x^2$ : $f(-1)=f(1)$.</p></div>
+
+<p><b>Importance du départ (Ex 1.35)</b> : $x\mapsto x^2$ n'est pas injective sur $\mathbb R$ ($-1$ et $1$), mais sa <b>restriction à $\mathbb R_+$</b> l'est : si $x,x'\ge0$ et $x^2=x'^2$ alors $|x|=|x'|$, donc $x=x'$ (car ils sont positifs). En réduisant le départ, on supprime les « doublons ».</p>
+
+<div class="box thm"><div class="t">Prop 1.36 — Strictement monotone ⟹ injective</div>
+<p>Pour $f$ définie sur une partie de $\mathbb R$ à valeurs dans $\mathbb R$.</p>
+<p><b>Preuve</b> (par la contraposée) : si $x\ne x'$, disons $x\lt x'$. Si $f$ est strictement croissante, $f(x)\lt f(x')$, donc $f(x)\ne f(x')$. Idem si strictement décroissante. </p>
+<p class="sub">Utile mais attention : certains exercices de partiel interdisent « les résultats d'analyse (tableau de variations…) ». Dans ce cas, utilise la méthode $f(x)=f(x')\Rightarrow x=x'$.</p></div>
+
+<div class="box thm"><div class="t">Prop 1.37 — Composition et injectivité</div>
+<p>$f:E\to F$, $g:F\to G$.</p>
+<ol><li>$f$ et $g$ injectives ⟹ $g\circ f$ injective.</li>
+<li>$g\circ f$ injective ⟹ <b>$f$</b> injective (on ne peut rien dire de $g$).</li></ol></div>
+
+<div class="box demo"><div class="t">Démonstration du 1 — expliquée trois fois</div>
+<p><b>Version rédigée.</b> Soient $x,x'\in E$ tels que $(g\circ f)(x)=(g\circ f)(x')$, c'est-à-dire $g(f(x))=g(f(x'))$. Comme $g$ est injective (appliquée aux deux éléments $f(x)$ et $f(x')$ de $F$), on obtient $f(x)=f(x')$. Comme $f$ est injective, on obtient $x=x'$. Donc $g\circ f$ est injective.</p>
+<p><b>Version « on enlève les couches ».</b> On part de $g(\text{truc})=g(\text{machin})$. L'injectivité de $g$ permet « d'enlever le $g$ » : truc = machin, c'est-à-dire $f(x)=f(x')$. Puis l'injectivité de $f$ permet « d'enlever le $f$ » : $x=x'$. <b>Être injective = pouvoir simplifier par $f$ dans une égalité.</b></p>
+<p><b>Version poly.</b> On pose $a=f(x)$, $a'=f(x')$ pour y voir clair : $g(a)=g(a')\Rightarrow a=a'$ ($g$ inj.) $\Rightarrow f(x)=f(x')\Rightarrow x=x'$ ($f$ inj.).</p></div>
+
+<div class="box demo"><div class="t">Démonstration du 2 — expliquée</div>
+<p>On suppose $g\circ f$ injective et on veut montrer $f$ injective. Soient $x,x'\in E$ tels que $f(x)=f(x')$. <b>On applique $g$ des deux côtés</b> (on a toujours le droit d'appliquer une fonction à deux choses égales) : $g(f(x))=g(f(x'))$, c'est-à-dire $(g\circ f)(x)=(g\circ f)(x')$. Comme $g\circ f$ est injective, $x=x'$.</p>
+<p><b>Idée</b> : si $f$ « recollait » deux éléments, $g$ ne pourrait plus jamais les séparer, donc $g\circ f$ les recollerait aussi.</p>
+<p><b>Pourquoi rien sur $g$ ?</b> Contre-exemple : $f:\{1\}\to\{1,2\}$, $f(1)=1$ et $g:\{1,2\}\to\{0\}$ (tout va sur 0). $g\circ f:\{1\}\to\{0\}$ est injective (un seul élément au départ !), mais $g$ n'est pas injective ($g(1)=g(2)$). Le problème : $g$ recolle 1 et 2, mais $f$ n'atteint jamais 2, donc ça ne se voit pas dans $g\circ f$.</p></div>
+
+<h3 id="c1-8">1.8 Surjectivité</h3>
+
+<div class="box def"><div class="t">Déf 1.38 — Surjection</div>
+<p>$f:E\to F$ est <b>surjective</b> si tout élément de $F$ a <b>au moins un</b> antécédent.</p></div>
+<div class="box coeur"><div class="t">Prop 1.39 — Caractérisations (PAR CŒUR)</div>
+<p>$$f\text{ surjective}\iff \forall y\in F,\ \exists x\in E,\ y=f(x)\iff f(E)=F\iff\forall y\in F,\ f^{-1}(\{y\})\ne\emptyset.$$</p></div>
+
+<p><b>En clair</b> : tout ce qui est dans l'arrivée est « touché ». Injective = « pas de doublons », surjective = « pas d'oubli ».</p>
+
+<div class="box coeur"><div class="t">Méthode — Montrer que $f$ est surjective</div>
+<p>« <i>Soit $y\in F$. Cherchons $x\in E$ tel que $f(x)=y$.</i> » Au brouillon tu résous l'équation $f(x)=y$ en exprimant $x$ en fonction de $y$. Puis tu rédiges : « <i>Posons $x=\dots$. Alors $x\in E$ [à vérifier !] et $f(x)=\dots=y$.</i> »</p>
+<p>Exemple : $f:\mathbb R\to\mathbb R,\ x\mapsto3x+1$. Soit $y\in\mathbb R$. Posons $x=\frac{y-1}3\in\mathbb R$. Alors $f(x)=3\cdot\frac{y-1}3+1=y$. Donc $f$ est surjective.</p></div>
+
+<div class="box piege"><div class="t">Piège : vérifier que le $x$ trouvé est bien dans $E$</div>
+<p>Exemple : $h:\mathbb R_+\to\mathbb R_+,\ x\mapsto x^2$. Pour $y\ge0$, on prend $x=\sqrt y$, qui est bien $\ge0$, donc dans le départ. ✔<br>
+Mais pour $f:\mathbb N\to\mathbb N,\ n\mapsto 2n$, résoudre $2n=y$ donne $n=y/2$, qui n'est pas un entier si $y$ est impair. Donc $f$ n'est pas surjective (1 n'a pas d'antécédent).</p></div>
+
+<div class="box coeur"><div class="t">Méthode — Montrer que $f$ N'est PAS surjective</div>
+<p>Trouver <b>un</b> $y\in F$ qui n'a <b>aucun</b> antécédent, et le justifier. Ex 1.41 : pour $x\mapsto x^2$ de $\mathbb R$ dans $\mathbb R$, $-3$ n'a pas d'antécédent car un carré est toujours $\ge0$. Pour $\exp:\mathbb R\to\mathbb R$, $-3$ non plus ($e^x>0$).</p></div>
+
+<p><b>Importance de l'arrivée (Ex 1.41)</b> : $x\mapsto x^2$ n'est pas surjective de $\mathbb R$ dans $\mathbb R$, mais sa <b>co-restriction</b> $\mathbb R\to\mathbb R_+$ l'est. En réduisant l'arrivée, on supprime les « oubliés ».</p>
+
+<div class="box astuce"><div class="t">Résumé visuel avec $x\mapsto x^2$</div>
+<table>
+<tr><th>Application</th><th>Injective ?</th><th>Surjective ?</th></tr>
+<tr><td>$\mathbb R\to\mathbb R$</td><td>Non ($f(-1)=f(1)$)</td><td>Non ($-1$ pas atteint)</td></tr>
+<tr><td>$\mathbb R_+\to\mathbb R$</td><td>Oui</td><td>Non</td></tr>
+<tr><td>$\mathbb R\to\mathbb R_+$</td><td>Non</td><td>Oui</td></tr>
+<tr><td>$\mathbb R_+\to\mathbb R_+$</td><td>Oui</td><td>Oui → bijective, réciproque $\sqrt{\ }$</td></tr>
+</table>
+<p>Même formule, quatre applications différentes. <b>Réduire le départ aide l'injectivité, réduire l'arrivée aide la surjectivité.</b></p></div>
+
+<div class="box thm"><div class="t">Prop 1.42 — Composition et surjectivité</div>
+<ol><li>$f$ et $g$ surjectives ⟹ $g\circ f$ surjective.</li>
+<li>$g\circ f$ surjective ⟹ <b>$g$</b> surjective (rien sur $f$).</li></ol></div>
+
+<div class="box demo"><div class="t">Démonstration du 1 — on « remonte » de $G$ à $E$</div>
+<p>Soit $z\in G$. On cherche $x\in E$ tel que $g(f(x))=z$.<br>
+• $g$ surjective : il existe $y\in F$ tel que $g(y)=z$.<br>
+• $f$ surjective : pour ce $y$, il existe $x\in E$ tel que $f(x)=y$.<br>
+• Alors $(g\circ f)(x)=g(f(x))=g(y)=z$. ✔</p>
+<p><b>Image</b> : on remonte la chaîne $E\xrightarrow{f}F\xrightarrow{g}G$ à l'envers : de $z$ on remonte à $y$ grâce à $g$, de $y$ on remonte à $x$ grâce à $f$.</p></div>
+<div class="box demo"><div class="t">Démonstration du 2</div>
+<p>Soit $z\in G$. Comme $g\circ f$ est surjective, il existe $x\in E$ tel que $g(f(x))=z$. Posons $y=f(x)\in F$ : alors $g(y)=z$. Donc $z$ a un antécédent par $g$.</p>
+<p><b>Idée</b> : si $g\circ f$ atteint tout $G$, comme le dernier passage se fait par $g$, c'est que $g$ atteint tout $G$.</p>
+<p><b>Rien sur $f$</b> : $f:\{1\}\to\{1,2\}$, $g:\{1,2\}\to\{0\}$. $g\circ f$ est surjective (sur $\{0\}$) mais $f$ n'atteint pas 2.</p></div>
+
+<div class="box astuce"><div class="t">Moyen mnémotechnique pour 1.37 et 1.42</div>
+<p>Dans $g\circ f$ : <b>la première appliquée ($f$) hérite de l'injectivité, la dernière ($g$) hérite de la surjectivité.</b><br>
+« $g\circ f$ inj ⟹ $f$ inj » (l'entrée), « $g\circ f$ surj ⟹ $g$ surj » (la sortie).</p></div>
+
+<h3 id="c1-9">1.9 Bijectivité, bijection réciproque</h3>
+
+<div class="box def"><div class="t">Déf 1.43 et Prop 1.44 — Bijection</div>
+<p>$f$ est <b>bijective</b> si elle est injective <b>et</b> surjective : tout $y\in F$ a <b>exactement un</b> antécédent.
+$$f\text{ bijective}\iff\forall y\in F,\ \exists!\,x\in E,\ y=f(x).$$</p></div>
+
+<div class="box def"><div class="t">Déf 1.46 — Bijection réciproque</div>
+<p>Si $f$ est bijective, on note $f^{-1}:F\to E$ l'application qui à $y$ associe son unique antécédent : $$y=f(x)\iff x=f^{-1}(y).$$</p></div>
+
+<div class="box coeur"><div class="t">Méthode — Montrer que $f$ est bijective ET trouver $f^{-1}$ en même temps (Rem. 1.47)</div>
+<p>Soit $y\in F$. On <b>résout l'équation $y=f(x)$ d'inconnue $x\in E$</b>. Si on trouve <b>une unique</b> solution $x$ (et qu'elle est bien dans $E$), alors $f$ est bijective et $f^{-1}(y)=$ cette solution.</p>
+<p><b>Exemple 1.48</b> : $f:\mathbb R\to\mathbb R_+^*$, $x\mapsto4e^{5x}$. Soit $y>0$.
+$$y=4e^{5x}\iff e^{5x}=\tfrac y4\iff 5x=\ln\tfrac y4\iff x=\tfrac15\ln\tfrac y4.$$
+($\ln\frac y4$ existe car $y>0$.) Solution unique dans $\mathbb R$ ⟹ $f$ bijective et $f^{-1}(y)=\frac15\ln\frac y4$.</p>
+<p><b>Attention</b> : il faut des <b>équivalences</b> (⟺) à chaque ligne pour avoir l'unicité. Si tu élèves au carré par exemple, tu perds l'équivalence et il faut vérifier.</p>
+<p>Exemple 1.45 : $f(x)=3x+1$ sur $\mathbb R$ : $y=3x+1\iff x=\frac{y-1}3$, donc bijective, $f^{-1}(y)=\frac{y-1}3$. Et $\exp:\mathbb R\to\mathbb R$ n'est pas bijective (pas surjective : $-3$).</p></div>
+
+<div class="box thm"><div class="t">Prop 1.49 et 1.50 — Bijection et composition</div>
+<p>Si $f$ est bijective : $f^{-1}\circ f=\mathrm{id}_E$ et $f\circ f^{-1}=\mathrm{id}_F$.</p>
+<p><b>Réciproquement</b> (1.50) : s'il existe $g:F\to E$ telle que <b>$g\circ f=\mathrm{id}_E$ ET $f\circ g=\mathrm{id}_F$</b>, alors $f$ est bijective et $g=f^{-1}$.</p></div>
+<div class="box demo"><div class="t">Démonstration de 1.50 (pas dans le poly, mais elle réutilise tout, très formatrice)</div>
+<p>• $g\circ f=\mathrm{id}_E$ est injective, donc par 1.37(2), <b>$f$ est injective</b> (la première appliquée).<br>
+• $f\circ g=\mathrm{id}_F$ est surjective, donc par 1.42(2), <b>$f$ est surjective</b> (la dernière appliquée dans $f\circ g$).<br>
+• Donc $f$ est bijective. Et $g=g\circ\mathrm{id}_F=g\circ(f\circ f^{-1})=(g\circ f)\circ f^{-1}=\mathrm{id}_E\circ f^{-1}=f^{-1}$.</p>
+<p class="sub">Attention, il faut LES DEUX égalités. Une seule ne suffit pas : $f:\mathbb N\to\mathbb N,\ n\mapsto n+1$ et $g(n)=\max(n-1,0)$ vérifient $g\circ f=\mathrm{id}$ mais $f$ n'est pas surjective.</p></div>
+
+<div class="box def"><div class="t">Déf 1.52 — Involution (TOMBÉ AU PARTIEL 2024)</div>
+<p>$f:E\to E$ est une <b>involution</b> si $f\circ f=\mathrm{id}_E$. Alors $f$ est bijective et $f^{-1}=f$ (on applique 1.50 avec $g=f$).</p></div>
+<p><b>Exemple 1.51</b> : $f(x,y)=(x,-y)$ (symétrie par rapport à l'axe des abscisses). $f(f(x,y))=f(x,-y)=(x,y)$. Donc $f\circ f=\mathrm{id}$, $f$ bijective et $f^{-1}=f$.</p>
+<p><b>Exemple du partiel 2024</b> : $f(x)=\dfrac{-x+3}{2x+1}$ sur $\mathbb R\setminus\{-\frac12\}$. On calcule $f(f(x))$ : numérateur $-\frac{-x+3}{2x+1}+3=\frac{x-3+6x+3}{2x+1}=\frac{7x}{2x+1}$ ; dénominateur $2\frac{-x+3}{2x+1}+1=\frac{-2x+6+2x+1}{2x+1}=\frac{7}{2x+1}$. Donc $f(f(x))=\frac{7x}{7}=x$. Conclusion : $f$ est une involution, donc bijective et $f^{-1}=f$. <b>C'est 1,5 point quasi gratuit si tu connais la propriété.</b></p>
+
+<div class="box thm"><div class="t">Prop 1.53 — Réciproque d'une composée</div>
+<p>Si $f$ et $g$ sont bijectives, $g\circ f$ l'est et $$(g\circ f)^{-1}=f^{-1}\circ g^{-1}\quad\text{(l'ordre s'inverse !)}$$</p></div>
+<div class="box demo"><div class="t">Démonstration + image</div>
+<p>On vérifie les deux égalités de 1.50 avec $h=f^{-1}\circ g^{-1}$ :<br>
+$(g\circ f)\circ(f^{-1}\circ g^{-1})=g\circ(f\circ f^{-1})\circ g^{-1}=g\circ\mathrm{id}_F\circ g^{-1}=g\circ g^{-1}=\mathrm{id}_G$.<br>
+$(f^{-1}\circ g^{-1})\circ(g\circ f)=f^{-1}\circ(g^{-1}\circ g)\circ f=f^{-1}\circ f=\mathrm{id}_E$.</p>
+<p><b>Image « chaussettes-chaussures »</b> : le matin tu mets les chaussettes ($f$) puis les chaussures ($g$). Le soir, pour défaire, tu enlèves d'abord les chaussures ($g^{-1}$) puis les chaussettes ($f^{-1}$).</p></div>
+<p>Aussi : si $f$ est bijective, $f^{-1}$ l'est aussi et $(f^{-1})^{-1}=f$.</p>
+
+<!-- ===================================================== -->
+<h3 id="c1-ex">1.10 Exercices corrigés du chapitre 1</h3>
+<p>Je t'ai sélectionné ceux qui ressemblent le plus aux partiels. Cherche avant d'ouvrir.</p>
+
+<div class="box ex"><div class="t">Exercice 1.15 — injective ? surjective ?</div>
+<p>$f_1:\mathbb N\to\mathbb N,\ n\mapsto n+1$ ; $f_2:\mathbb Z\to\mathbb Z,\ n\mapsto -n$ ; $f_3:\mathbb N\to\mathbb Z,\ n\mapsto(-1)^n$ ; $f_4:\mathbb N\to\mathbb Z,\ n\mapsto n(-1)^n$ ; $f_5:\mathbb N\to\mathbb Z,\ n\mapsto n^2(-1)^n$.</p></div>
+<details><summary>Correction</summary>
+<ul>
+<li>$f_1$ : <b>injective</b> ($n+1=m+1\Rightarrow n=m$). <b>Pas surjective</b> : $0$ n'a pas d'antécédent ($n+1=0\Rightarrow n=-1\notin\mathbb N$). <i>Remarque : sur $\mathbb N$ infini, injective n'entraîne pas surjective — ça ne marche que pour les ensembles finis de même cardinal (chapitre 2).</i></li>
+<li>$f_2$ : $f_2(f_2(n))=n$, c'est une involution, donc <b>bijective</b> avec $f_2^{-1}=f_2$.</li>
+<li>$f_3$ : <b>pas injective</b> ($f_3(0)=f_3(2)=1$, $0\ne2$). <b>Pas surjective</b> : elle ne prend que les valeurs $1$ et $-1$, donc $5$ n'a pas d'antécédent.</li>
+<li>$f_4$ : valeurs $0,-1,2,-3,4,-5,\dots$ Remarque clé : $|f_4(n)|=n$. Si $f_4(n)=f_4(m)$, alors $|f_4(n)|=|f_4(m)|$ donc $n=m$ : <b>injective</b>. <b>Pas surjective</b> : $1$ n'est pas atteint ($|f_4(n)|=1\Rightarrow n=1$, mais $f_4(1)=-1$).</li>
+<li>$f_5$ : même idée, $|f_5(n)|=n^2$ et $n\ge0$, donc $f_5(n)=f_5(m)\Rightarrow n^2=m^2\Rightarrow n=m$ : <b>injective</b>. <b>Pas surjective</b> : $2$ n'est pas atteint (2 n'est pas un carré).</li>
+</ul></details>
+
+<div class="box ex"><div class="t">Exercice 1.5 — si $f\circ f=f$, alors $x\in f(E)\iff f(x)=x$</div></div>
+<details><summary>Correction (même idée qu'au partiel 2024, question 2d)</summary>
+<p>($\Rightarrow$) Soit $x\in f(E)$ : il existe $a\in E$ tel que $x=f(a)$. Alors $f(x)=f(f(a))=(f\circ f)(a)=f(a)=x$.</p>
+<p>($\Leftarrow$) Si $f(x)=x$, alors $x$ est l'image de l'élément $x$ : $x=f(x)\in f(E)$.</p></details>
+
+<div class="box ex"><div class="t">Exercice 1.10 — $f(x)=\dfrac{2x}{1+x^2}$ sur $\mathbb R$. Montrer $f(\mathbb R)=[-1,1]$ et trouver $f^{-1}([0,1])$.</div></div>
+<details><summary>Correction (double inclusion modèle)</summary>
+<p><b>$f(\mathbb R)\subset[-1,1]$</b> : soit $y\in f(\mathbb R)$, $y=f(x)$. On veut $|2x|\le1+x^2$, c'est-à-dire $x^2-2|x|+1\ge0$, soit $(|x|-1)^2\ge0$ : vrai. Donc $|y|\le1$.</p>
+<p><b>$[-1,1]\subset f(\mathbb R)$</b> : soit $y\in[-1,1]$. On cherche $x$ tel que $\frac{2x}{1+x^2}=y\iff yx^2-2x+y=0$.<br>
+• Si $y=0$ : $x=0$ convient.<br>
+• Si $y\ne0$ : équation du second degré, $\Delta=4-4y^2=4(1-y^2)\ge0$ car $|y|\le1$. Donc $x=\frac{1-\sqrt{1-y^2}}{y}$ est une solution réelle. Donc $y\in f(\mathbb R)$.</p>
+<p><b>$f^{-1}([0,1])$</b> : $x\in f^{-1}([0,1])\iff 0\le f(x)\le1$. On sait déjà $f(x)\le1$ toujours, et $f(x)\ge0\iff 2x\ge0\iff x\ge0$ (car $1+x^2>0$). Donc $f^{-1}([0,1])=\mathbb R_+$.</p></details>
+
+<div class="box ex"><div class="t">Exercice 1.18 — compositions « mixtes »</div>
+<p>1. $g\circ f$ injective et $f$ surjective ⟹ $g$ injective. &nbsp; 2. $g\circ f$ surjective et $g$ injective ⟹ $f$ surjective.</p></div>
+<details><summary>Correction</summary>
+<p><b>1.</b> Soient $y,y'\in F$ tels que $g(y)=g(y')$. Comme $f$ est surjective, $y=f(x)$ et $y'=f(x')$ pour certains $x,x'\in E$. Alors $g(f(x))=g(f(x'))$, et $g\circ f$ injective donne $x=x'$, donc $y=f(x)=f(x')=y'$.</p>
+<p><b>2.</b> Soit $y\in F$. Alors $g(y)\in G$ et $g\circ f$ surjective donne $x\in E$ avec $g(f(x))=g(y)$. Comme $g$ est injective, $f(x)=y$. Donc $y$ a un antécédent par $f$.</p></details>
+
+<div class="box ex"><div class="t">Exercice 1.19 (PARTIEL 2022) — $f$ injective $\iff\forall A\subset E,\ f^{-1}(f(A))=A$ ; $f$ surjective $\iff \forall B\subset F,\ f(f^{-1}(B))=B$</div></div>
+<details><summary>Correction détaillée</summary>
+<p><b>Injectivité, sens ⟹.</b> On suppose $f$ injective, soit $A\subset E$. On sait déjà (Prop 1.27) $A\subset f^{-1}(f(A))$. Montrons l'autre inclusion. Soit $x\in f^{-1}(f(A))$. Alors $f(x)\in f(A)$, donc il existe $a\in A$ tel que $f(x)=f(a)$. Par injectivité, $x=a$, donc $x\in A$.</p>
+<p><b>Injectivité, sens ⟸.</b> On suppose l'égalité vraie pour toute partie. Soient $x,x'$ tels que $f(x)=f(x')$. Astuce : on prend <b>$A=\{x\}$</b>. Alors $f(A)=\{f(x)\}$, et $x'\in f^{-1}(\{f(x)\})$ puisque $f(x')=f(x)$. Donc $x'\in f^{-1}(f(A))=A=\{x\}$, donc $x'=x$.</p>
+<p><b>Surjectivité, sens ⟹.</b> On sait $f(f^{-1}(B))\subset B$. Soit $y\in B$ ; $f$ surjective donne $x$ avec $f(x)=y$. Comme $f(x)=y\in B$, $x\in f^{-1}(B)$, donc $y=f(x)\in f(f^{-1}(B))$.</p>
+<p><b>Surjectivité, sens ⟸.</b> On prend <b>$B=F$</b> : $f^{-1}(F)=E$ (tout $x$ envoie dans $F$), donc $F=f(f^{-1}(F))=f(E)$ : c'est la surjectivité.</p>
+<p class="sub">Astuce générale : pour utiliser une hypothèse « pour toute partie », on choisit une partie bien précise (un singleton, ou tout l'ensemble).</p></details>
+
+<div class="box ex"><div class="t">Exercice 1.21 / 1.22 — bijections et réciproques</div>
+<p>(a) $f:\mathbb R_-\to\mathbb R_+,\ x\mapsto x^2$ et $g:\mathbb R_-\to\mathbb R_+,\ x\mapsto\sqrt{|x|}$ : $g\circ f$ et $f\circ g$ sont-elles définies ? Montrer que $f,g$ sont bijectives, donner les réciproques.<br>
+(b) $f:]1,+\infty[\to]0,+\infty[,\ x\mapsto\ln\frac{x+1}{x-1}$ et $g:\mathbb R\to\mathbb R,\ x\mapsto\sqrt[3]{1-x^3}$.</p></div>
+<details><summary>Correction</summary>
+<p><b>(a)</b> $g\circ f$ : $f$ arrive dans $\mathbb R_+$ mais $g$ part de $\mathbb R_-$ : <b>pas définie</b> (par ex. $f(-1)=1\notin\mathbb R_-$). $f\circ g$ : pareil, <b>pas définie</b>.<br>
+$f$ : soit $y\ge0$. $x^2=y$ avec $x\le0$ $\iff x=-\sqrt y$ (unique). Bijective, $f^{-1}(y)=-\sqrt y$.<br>
+$g$ : soit $y\ge0$. $\sqrt{|x|}=y$ avec $x\le0$ $\iff |x|=y^2\iff -x=y^2\iff x=-y^2$ (unique, et bien $\le0$). Bijective, $g^{-1}(y)=-y^2$.</p>
+<p><b>(b)</b> $f$ : d'abord, pour $x>1$, $\frac{x+1}{x-1}>1$ donc $f(x)>0$ : l'arrivée est correcte. Soit $y>0$ :
+$\ln\frac{x+1}{x-1}=y\iff\frac{x+1}{x-1}=e^y\iff x+1=e^y(x-1)\iff x(e^y-1)=e^y+1\iff x=\frac{e^y+1}{e^y-1}$ (on peut diviser car $y>0\Rightarrow e^y\ne1$). Et $x=1+\frac{2}{e^y-1}>1$ ✔. Solution unique : $f$ bijective, $f^{-1}(y)=\frac{e^y+1}{e^y-1}$.<br>
+$g$ : calculons $g(g(x))=\sqrt[3]{1-\big(\sqrt[3]{1-x^3}\big)^3}=\sqrt[3]{1-(1-x^3)}=\sqrt[3]{x^3}=x$. Donc $g$ est une <b>involution</b> : bijective et $g^{-1}=g$.</p></details>
+
+<div class="box ex"><div class="t">Exercice 1.20 (pour aller plus loin) — si $f\circ f\circ f=f$, alors $f$ surjective ⟺ $f$ injective</div></div>
+<details><summary>Correction</summary>
+<p>(⟸) $f$ injective. Pour tout $x$ : $f(f(f(x)))=f(x)$, et en « simplifiant par $f$ » (injectivité) $f(f(x))=x$. Donc $x$ a pour antécédent $f(x)$ : surjective.</p>
+<p>(⟹) $f$ surjective. Soient $x,x'$ avec $f(x)=f(x')$. Par surjectivité, $x=f(a)$ et $x'=f(a')$. Alors $x=f(a)=f^3(a)=f(f(f(a)))=f(f(x))$ et de même $x'=f(f(x'))$. Or $f(x)=f(x')\Rightarrow f(f(x))=f(f(x'))$, donc $x=x'$.</p></details>
+
+<!-- ===================================================== -->
+<h2 id="c2">Chapitre 2 — Relations, ensembles finis, dénombrement</h2>
+
+<h3 id="c2-1">2.1 Relations binaires</h3>
+
+<div class="box def"><div class="t">Déf 2.1 — Relation binaire</div>
+<p>Une relation $\mathcal R$ sur un ensemble $E$ est une propriété qui relie (ou non) deux éléments $x,y$ de $E$. On écrit $x\,\mathcal R\,y$ (« $x$ est en relation avec $y$ »). De façon équivalente, c'est une partie $G$ de $E\times E$ (son graphe) : $x\,\mathcal R\,y\iff (x,y)\in G$.</p></div>
+<p>Exemples : $\le$ sur $\mathbb R$ ; « divise » sur $\mathbb Z$ ($a\mid b$ ssi $b=ka$ avec $k\in\mathbb Z$) ; $=$ ; « parallèle à » sur les droites ; $\subset$ sur $\mathcal P(E)$. L'ordre compte : $2\le3$ mais pas $3\le2$.</p>
+
+<div class="box coeur"><div class="t">Les 4 propriétés (PAR CŒUR, avec les quantificateurs)</div>
+<table>
+<tr><th>Propriété</th><th>Définition</th><th>En français</th></tr>
+<tr><td><b>Réflexive</b></td><td>$\forall x\in E,\ x\,\mathcal R\,x$</td><td>tout le monde est en relation avec soi-même</td></tr>
+<tr><td><b>Symétrique</b></td><td>$\forall x,y\in E,\ x\,\mathcal R\,y\Rightarrow y\,\mathcal R\,x$</td><td>si ça marche dans un sens, ça marche dans l'autre</td></tr>
+<tr><td><b>Antisymétrique</b></td><td>$\forall x,y\in E,\ (x\,\mathcal R\,y\text{ et }y\,\mathcal R\,x)\Rightarrow x=y$</td><td>dans les deux sens à la fois, seulement si c'est le même élément</td></tr>
+<tr><td><b>Transitive</b></td><td>$\forall x,y,z\in E,\ (x\,\mathcal R\,y\text{ et }y\,\mathcal R\,z)\Rightarrow x\,\mathcal R\,z$</td><td>on peut « enchaîner »</td></tr>
+</table></div>
+
+<div class="box piege"><div class="t">Piège : « antisymétrique » ne veut PAS dire « pas symétrique »</div>
+<p>Ce sont deux propriétés indépendantes. L'égalité $=$ est à la fois symétrique ET antisymétrique. La relation $x\,\mathcal R\,y\iff x^2+y^2\le1$ ou $x=y$ (partiel 2024) est symétrique mais pas antisymétrique ; à l'inverse $\le$ est antisymétrique mais pas symétrique. Pour montrer qu'une relation n'est pas antisymétrique, il faut deux éléments <b>différents</b> $x\ne y$ avec $x\,\mathcal R\,y$ ET $y\,\mathcal R\,x$.</p></div>
+
+<div class="box coeur"><div class="t">Méthode — étudier une relation</div>
+<p>Pour chaque propriété : soit tu la <b>démontres</b> (« Soient $x,y\in E$ tels que $x\,\mathcal R\,y$… »), soit tu donnes un <b>contre-exemple numérique</b> :</p>
+<ul>
+<li>pas réflexive : un $x$ avec non($x\,\mathcal R\,x$) ;</li>
+<li>pas symétrique : $x,y$ avec $x\,\mathcal R\,y$ mais non($y\,\mathcal R\,x$) ;</li>
+<li>pas antisymétrique : $x\ne y$ avec $x\,\mathcal R\,y$ et $y\,\mathcal R\,x$ ;</li>
+<li>pas transitive : $x,y,z$ avec $x\,\mathcal R\,y$, $y\,\mathcal R\,z$ mais non($x\,\mathcal R\,z$).</li>
+</ul></div>
+
+<p><b>Exemple 2.3</b> : $E=\{a,b,c\}$, graphe $G=\{(a,b)\}$ (seul $a\,\mathcal R\,b$ est vrai).<br>
+• Pas réflexive : $(a,a)\notin G$.<br>
+• Pas symétrique : $a\,\mathcal R\,b$ mais pas $b\,\mathcal R\,a$.<br>
+• <b>Transitive</b> : surprenant ? Pour tester, il faut trouver $x\,\mathcal R\,y$ et $y\,\mathcal R\,z$. La seule relation est $a\,\mathcal R\,b$ ; il faudrait $b\,\mathcal R\,z$, qui n'existe jamais. L'hypothèse « $x\,\mathcal R\,y$ et $y\,\mathcal R\,z$ » n'est donc <b>jamais vraie</b>, et une implication dont l'hypothèse est toujours fausse est vraie. (C'est la logique : « si je suis la reine d'Angleterre, alors je vole » est vrai.)<br>
+• Antisymétrique aussi, pour la même raison.</p>
+
+<h3 id="c2-2">2.2 Relations d'ordre et relations d'équivalence</h3>
+
+<div class="box def"><div class="t">Déf 2.4 et 2.6</div>
+<p><b>Relation d'ordre</b> = réflexive + <b>anti</b>symétrique + transitive. (Pour « comparer », « classer ».)<br>
+<b>Relation d'équivalence</b> = réflexive + symétrique + transitive. (Pour dire « se ressemblent », « sont pareils d'un certain point de vue ».)</p>
+<p>Mnémo : les deux ont R et T. Ordre = <b>A</b>nti, Équivalence = <b>S</b>ymétrique. « RAT » pour l'ordre, « RST » pour l'équivalence.</p></div>
+
+<p><b>Ordres</b> : $\le$, $\ge$ sur $\mathbb R$ ; $\subset$ sur $\mathcal P(E)$ (ex. 2.5 : $A\subset A$ ; $A\subset B$ et $B\subset A\Rightarrow A=B$ c'est la double inclusion ! ; $A\subset B\subset C\Rightarrow A\subset C$) ; la divisibilité sur $\mathbb N^*$.</p>
+
+<details><summary>Exercice 2.2 — divisibilité : ordre sur $\mathbb N^*$, pas sur $\mathbb Z^*$</summary>
+<p>Sur $\mathbb N^*$ : réflexive ($a=1\cdot a$). Transitive : $b=ka$, $c=k'b\Rightarrow c=(kk')a$. Antisymétrique : si $b=ka$ et $a=k'b$ avec $k,k'\in\mathbb N^*$, alors $a=kk'a$, donc $kk'=1$, donc $k=k'=1$ et $a=b$.<br>
+Sur $\mathbb Z^*$ : $2\mid-2$ (car $-2=(-1)\cdot2$) et $-2\mid2$, mais $2\ne-2$. Pas antisymétrique, donc pas un ordre.</p></details>
+
+<p><b>Équivalences</b> : l'égalité ; la congruence modulo $k$.</p>
+
+<div class="box demo"><div class="t">Exemple 2.7 — congruence modulo $2\pi$ : $x\,\mathcal R\,y\iff\exists k\in\mathbb Z,\ x=y+2k\pi$</div>
+<p><b>Réflexive</b> : $x=x+2\cdot0\cdot\pi$, on prend $k=0$.<br>
+<b>Symétrique</b> : si $x=y+2k\pi$, alors $y=x-2k\pi=x+2(-k)\pi$, et $-k\in\mathbb Z$. Donc $y\,\mathcal R\,x$.<br>
+<b>Transitive</b> : si $x=y+2k\pi$ et $y=z+2k'\pi$, alors $x=z+2k'\pi+2k\pi=z+2(k+k')\pi$ avec $k+k'\in\mathbb Z$. Donc $x\,\mathcal R\,z$.</p>
+<p><b>Ce qu'il faut voir</b> : à chaque fois, on <b>déplie</b> la définition (on écrit le $k$), on calcule, et on <b>exhibe</b> le nouvel entier ($0$, puis $-k$, puis $k+k'$).</p></div>
+
+<div class="box demo"><div class="t">Exemple 2.8 — LA relation d'équivalence modèle : $x\,\mathcal R\,y\iff f(x)=f(y)$</div>
+<p>Pour n'importe quelle application $f$.<br>
+<b>R</b> : $f(x)=f(x)$. <b>S</b> : $f(x)=f(y)\Rightarrow f(y)=f(x)$. <b>T</b> : $f(x)=f(y)$ et $f(y)=f(z)\Rightarrow f(x)=f(z)$.</p>
+<p><b>Astuce de pro</b> : beaucoup de relations d'équivalence de partiel sont de cette forme déguisée. Si tu arrives à écrire $x\,\mathcal R\,y\iff(\text{truc en }x)=(\text{même truc en }y)$, c'est gagné. Par exemple $X\,\mathcal R\,Y\iff X\cap A=Y\cap A$ (partiel 2024, ex. 4) est de la forme $f(X)=f(Y)$ avec $f(X)=X\cap A$.</p></div>
+
+<h3 id="c2-3">2.3 Partitions et classes d'équivalence</h3>
+
+<div class="box def"><div class="t">Déf 2.9 — Partition</div>
+<p>Une partition de $E$ est une famille de parties $(A_i)_{i\in I}$ de $E$ telles que :</p>
+<ol><li>chaque $A_i$ est <b>non vide</b> ;</li><li>elles sont <b>deux à deux disjointes</b> : $i\ne j\Rightarrow A_i\cap A_j=\emptyset$ ;</li><li>leur <b>réunion</b> est $E$.</li></ol>
+<p>Image : on découpe un gâteau en parts. Pas de part vide, pas de chevauchement, et on n'oublie aucun morceau.</p></div>
+
+<p><b>Exemple 2.10</b>, $E=\{1,2,3\}$. Il y a exactement <b>5</b> partitions :
+$\{\{1\},\{2\},\{3\}\}$, $\{\{1,2\},\{3\}\}$, $\{\{1,3\},\{2\}\}$, $\{\{2,3\},\{1\}\}$, $\{\{1,2,3\}\}$.
+<span class="sub">(Le poly a une coquille : il écrit deux fois $\{\{1\},\{2\},\{3\}\}$ et oublie $\{\{1,3\},\{2\}\}$ et $\{\{1,2,3\}\}$.)</span><br>
+Ne sont pas des partitions : $\{\emptyset,\{1,3\},\{2\}\}$ (contient $\emptyset$) ; $\{\{2\},\{3\}\}$ (oublie 1).<br>
+<b>Ex 2.11</b> : $\mathbb R_+$ et $\mathbb R_-$ ne forment pas une partition de $\mathbb R$ : $0$ est dans les deux.</p>
+
+<div class="box def"><div class="t">Déf 2.12 — Classe d'équivalence</div>
+<p>Si $\mathcal R$ est une relation <b>d'équivalence</b> sur $E$, la classe de $x$ est $$\mathrm{Cl}(x)=\{y\in E\ /\ y\,\mathcal R\,x\}$$ (tous ceux qui « ressemblent » à $x$). On a toujours $x\in\mathrm{Cl}(x)$ (réflexivité), donc une classe n'est jamais vide.</p>
+<p>L'ensemble des classes s'appelle l'<b>ensemble quotient</b>, noté $E/\mathcal R$.</p></div>
+
+<div class="box thm"><div class="t">Théorème — Les classes d'équivalence forment une partition de $E$</div>
+<p>C'est LE résultat qui relie les deux notions. Le poly l'affirme sans preuve ; la voici, car elle aide à comprendre.</p></div>
+<details><summary>Démonstration</summary>
+<p>1. <b>Non vides</b> : $x\in\mathrm{Cl}(x)$.<br>
+2. <b>Réunion = $E$</b> : tout $x\in E$ est dans sa propre classe.<br>
+3. <b>Deux classes sont soit égales, soit disjointes.</b> Supposons $\mathrm{Cl}(x)\cap\mathrm{Cl}(y)\ne\emptyset$ : il existe $z$ avec $z\,\mathcal R\,x$ et $z\,\mathcal R\,y$. Par symétrie $x\,\mathcal R\,z$, puis par transitivité ($x\,\mathcal R\,z$ et $z\,\mathcal R\,y$) : $x\,\mathcal R\,y$. Alors pour tout $w\in\mathrm{Cl}(x)$ : $w\,\mathcal R\,x$ et $x\,\mathcal R\,y$ donc $w\,\mathcal R\,y$, donc $w\in\mathrm{Cl}(y)$. Donc $\mathrm{Cl}(x)\subset\mathrm{Cl}(y)$ et de même dans l'autre sens : $\mathrm{Cl}(x)=\mathrm{Cl}(y)$.</p>
+<p><b>À retenir</b> : $\mathrm{Cl}(x)=\mathrm{Cl}(y)\iff x\,\mathcal R\,y$.</p></details>
+
+<div class="box coeur"><div class="t">Méthode — calculer la classe de $x$</div>
+<p>On écrit « $y\in\mathrm{Cl}(x)\iff y\,\mathcal R\,x\iff\dots$ » et on <b>résout en $y$</b> (c'est une équation dont l'inconnue est $y$, et $x$ est fixé).</p></div>
+
+<p><b>Exemple 2.13</b> : sur $\mathbb Z$, $x\,\mathcal R\,y\iff 2\mid(x-y)$. Deux classes : les pairs ($\mathrm{Cl}(0)$) et les impairs ($\mathrm{Cl}(1)$).<br>
+<b>Exemple 2.14</b> : modulo $2\pi$ : $y\in\mathrm{Cl}(x)\iff y-x\in2\pi\mathbb Z$, donc $\mathrm{Cl}(x)=\{x+2k\pi,\ k\in\mathbb Z\}$.<br>
+<b>Exemple 2.15</b> : $x\,\mathcal R\,y\iff\sin x=\sin y$. $y\in\mathrm{Cl}(x)\iff\sin y=\sin x\iff y=x+2k\pi$ ou $y=\pi-x+2k\pi$. Donc $\mathrm{Cl}(x)=\{x+2k\pi\}\cup\{\pi-x+2k\pi\}$, $k\in\mathbb Z$.</p>
+
+<div class="box ex"><div class="t">Exercices 2.1 et 2.3 (et partiel 2024)</div>
+<p>(a) Sur $\mathbb Z$, $x\,\mathcal R\,y\iff x=-y$. (b) Sur $\mathbb R$, $x\,\mathcal R\,y\iff\cos^2x+\sin^2y=1$. (c) $E=[\![1,10]\!]$, « même reste dans la division par 3 » : classes ? (d) Sur $\mathbb R$, $x\,\mathcal R\,y\iff x^2-y^2=x-y$ : équivalence ? classes ? (e) Partiel 2024 : $x\,\mathcal R\,y\iff(\max(|x|,|y|)\le1$ ou $x=y)$.</p></div>
+<details><summary>Correction</summary>
+<p><b>(a)</b> Pas réflexive : $1=-1$ faux. Symétrique : $x=-y\Rightarrow y=-x$. Pas antisymétrique : $1\,\mathcal R\,(-1)$ et $(-1)\,\mathcal R\,1$ mais $1\ne-1$. Pas transitive : $1\,\mathcal R\,(-1)$, $(-1)\,\mathcal R\,1$, mais pas $1\,\mathcal R\,1$.</p>
+<p><b>(b)</b> Comme $\cos^2x=1-\sin^2x$ : $x\,\mathcal R\,y\iff 1-\sin^2x+\sin^2y=1\iff\sin^2x=\sin^2y$. C'est de la forme $f(x)=f(y)$ avec $f=\sin^2$ : <b>réflexive, symétrique, transitive</b> (Ex. 2.8). Pas antisymétrique : $0\,\mathcal R\,\pi$ et $\pi\,\mathcal R\,0$, $0\ne\pi$.</p>
+<p><b>(c)</b> $\{3,6,9\}$ (reste 0), $\{1,4,7,10\}$ (reste 1), $\{2,5,8\}$ (reste 2). Vérifie : c'est bien une partition de $[\![1,10]\!]$.</p>
+<p><b>(d)</b> $x^2-y^2=x-y\iff x^2-x=y^2-y$ : forme $f(x)=f(y)$ avec $f(t)=t^2-t$, donc <b>équivalence</b>. Classe : $y\in\mathrm{Cl}(x)\iff x^2-y^2-(x-y)=0\iff(x-y)(x+y)-(x-y)=0\iff(x-y)(x+y-1)=0\iff y=x$ ou $y=1-x$. Donc $\mathrm{Cl}(x)=\{x,1-x\}$ (un seul élément si $x=\frac12$).</p>
+<p><b>(e)</b> R : $x=x$ donc vrai. S : la condition est symétrique en $x,y$. T : 4 cas selon quelle partie du « ou » est vraie dans $x\,\mathcal R\,y$ et dans $y\,\mathcal R\,z$ (voir corrigé 2024 : dans chaque cas on conclut). Classes : si $|x|\le1$, $\mathrm{Cl}(x)=[-1,1]$ ; si $|x|>1$, $\mathrm{Cl}(x)=\{x\}$.<br>
+<i>Méthode avec un « ou » : faire des cas.</i></p></details>
+
+<h3 id="c2-4">2.4 Ensembles équipotents, dénombrables, finis ; cardinal</h3>
+
+<div class="box def"><div class="t">Déf 2.16, 2.18, 2.20</div>
+<ul>
+<li>$E$ et $F$ sont <b>équipotents</b> s'il existe une <b>bijection</b> de $E$ sur $F$. (« Ils ont autant d'éléments », même s'ils sont infinis.)</li>
+<li>$E$ est <b>dénombrable</b> s'il est équipotent à $\mathbb N$ (on peut numéroter ses éléments : 1er, 2e, 3e…).</li>
+<li>$E$ est <b>fini</b> s'il est vide ou s'il existe $n\ge1$ et une bijection de $E$ sur $[\![1,n]\!]$. Ce $n$ est unique, c'est le <b>cardinal</b> : $\mathrm{Card}(E)$, $\#E$ ou $|E|$. $\mathrm{Card}(\emptyset)=0$.</li>
+</ul></div>
+<p><b>En clair</b> : compter les éléments de $E$, c'est les numéroter $1,2,\dots,n$ sans en oublier et sans en compter deux fois. « Sans en oublier » = surjectif, « sans doublon » = injectif. Donc <b>compter, c'est construire une bijection</b>. C'est pour ça que le chapitre 1 sert au chapitre 2.</p>
+<p>À savoir (sans preuve) : $\mathbb N$, $\mathbb Z$, $\mathbb Q$ sont dénombrables, <b>$\mathbb R$ ne l'est pas</b> ; un produit de deux dénombrables est dénombrable ; toute partie majorée de $\mathbb N$ est finie. Tes notes du 3/11 donnent aussi : $\mathbb R$ et $]-\frac\pi2,\frac\pi2[$ sont équipotents (la bijection est $\arctan$/ $\tan$).</p>
+
+<div class="box ex"><div class="t">Exercice 2.4 (fait en cours le 3/11)</div>
+<p>1. $[\![1,n]\!]$ et $[\![n+1,2n]\!]$ sont équipotents. 2. $2\mathbb N$ et $2\mathbb N+1$ sont équipotents. 3. L'ensemble des pairs est dénombrable.</p></div>
+<details><summary>Correction</summary>
+<p><b>1.</b> $f:[\![1,n]\!]\to[\![n+1,2n]\!],\ k\mapsto k+n$ et $g:[\![n+1,2n]\!]\to[\![1,n]\!],\ k\mapsto k-n$. (Bien définies : si $1\le k\le n$ alors $n+1\le k+n\le2n$.) $g(f(k))=k+n-n=k$ et $f(g(k))=k$ : donc $g\circ f=\mathrm{id}$, $f\circ g=\mathrm{id}$, et par la Prop 1.50, $f$ est bijective. C'est exactement ce que fait le prof dans tes notes.</p>
+<p><b>2.</b> $f:2\mathbb N\to2\mathbb N+1,\ n\mapsto n+1$, réciproque $m\mapsto m-1$.</p>
+<p><b>3.</b> $f:\mathbb N\to2\mathbb N,\ n\mapsto2n$ est bijective (réciproque $m\mapsto m/2$). Donc $2\mathbb N$ est équipotent à $\mathbb N$ : dénombrable. (Surprenant : il y a « autant » de pairs que d'entiers !)</p></details>
+
+<div class="box thm"><div class="t">Prop 2.22 — Parties d'un ensemble fini</div>
+<p>Si $E$ est fini et $A\subset E$, alors $A$ est fini et $\mathrm{Card}(A)\le\mathrm{Card}(E)$, avec <b>égalité si et seulement si $A=E$</b>.</p></div>
+<p>Évident intuitivement, mais la partie « égalité ⟺ $A=E$ » est un argument clé de la Prop 2.36 : <b>si une partie a autant d'éléments que l'ensemble fini qui la contient, c'est l'ensemble entier.</b></p>
+
+<div class="box coeur"><div class="t">Prop 2.23 — Par cœur</div>
+<p>Si $\mathrm{Card}(E)=n$ et $\mathrm{Card}(F)=p$ :
+$$\mathrm{Card}\,\mathcal P(E)=2^n\qquad\mathrm{Card}\,\mathcal F(E,F)=p^n.$$</p></div>
+<div class="box demo"><div class="t">Pourquoi ? (deux explications)</div>
+<p><b>$p^n$ applications</b> : une application $E\to F$, c'est choisir une image pour chacun des $n$ éléments de $E$. Pour chacun, $p$ choix. Principe du produit : $p\times p\times\dots\times p=p^n$. (Attention à l'ordre : c'est <b>(arrivée)<sup>(départ)</sup></b>.)</p>
+<p><b>$2^n$ parties</b> : pour construire une partie $A$, on passe en revue chaque élément de $E$ et on décide « dedans » ou « dehors » : 2 choix, $n$ fois, donc $2^n$. Formellement, $A\mapsto\mathbb 1_A$ est une bijection de $\mathcal P(E)$ sur $\mathcal F(E,\{0,1\})$, qui a $2^n$ éléments par la formule précédente.</p>
+<p>Vérif : $E=\{1,2,3\}$, $\mathcal P(E)$ a bien $8=2^3$ éléments (liste de l'ex. 2.49).</p></div>
+
+<div class="box ex"><div class="t">Exercice 2.5 — cardinaux</div>
+<p>$E=[\![-5,52]\!]$ ; $F=\{e^k,\ k\in[\![5,25]\!]\}$ ; $G=\{k\in\mathbb Z:\ |k-3|\lt10\}$.</p></div>
+<details><summary>Correction</summary>
+<div class="box piege"><div class="t">Piège : il y a $b-a+1$ entiers entre $a$ et $b$ inclus</div><p>Pas $b-a$ ! Entre 1 et 10 il y a 10 entiers, $10-1+1$.</p></div>
+<p>$\mathrm{Card}(E)=52-(-5)+1=58$.<br>
+$F$ : $k\mapsto e^k$ est injective (exp strictement croissante), donc c'est une bijection de $[\![5,25]\!]$ sur $F$ : $\mathrm{Card}(F)=25-5+1=21$.<br>
+$G$ : $|k-3|\lt10\iff-10\lt k-3\lt10\iff-7\lt k\lt13\iff k\in[\![-6,12]\!]$ (inégalités strictes, $k$ entier !). $\mathrm{Card}(G)=12-(-6)+1=19$.</p></details>
+
+<h3 id="c2-5">2.5 Principe de la somme</h3>
+
+<div class="box thm"><div class="t">Prop 2.24 — Réunion disjointe</div>
+<p>Si $A\cap B=\emptyset$ : $\mathrm{Card}(A\cup B)=\mathrm{Card}A+\mathrm{Card}B$. Plus généralement, si les $A_i$ sont <b>deux à deux disjointes</b> : $\mathrm{Card}\big(\bigcup A_i\big)=\sum\mathrm{Card}(A_i)$. Et : $\mathrm{Card}(\overline A)=\mathrm{Card}(E)-\mathrm{Card}(A)$.</p></div>
+<div class="box demo"><div class="t">Idée de la démonstration</div>
+<p>On numérote $A$ de $1$ à $p$ (bijection $f$) et $B$ de $1$ à $q$ (bijection $g$). On numérote $A\cup B$ en mettant d'abord ceux de $A$ (numéros $1$ à $p$), puis ceux de $B$ décalés de $p$ (numéros $p+1$ à $p+q$) : $h(k)=f(k)$ si $k\le p$, $h(k)=g(k-p)$ sinon. Comme $A$ et $B$ n'ont rien en commun, personne n'est numéroté deux fois : $h$ est une bijection, donc $\mathrm{Card}(A\cup B)=p+q$. Le complémentaire, c'est le cas $B=\overline A$ : $A\cup\overline A=E$, disjoints.</p></div>
+
+<div class="box astuce"><div class="t">L'astuce du complémentaire — à utiliser dès qu'on lit « au moins un »</div>
+<p>Nombre de cas avec « au moins un X » = (nombre total) − (nombre de cas avec « aucun X »). Presque toujours plus simple.</p></div>
+
+<p><b>Lemme des bergers (2.25)</b> : si $E$ est réunion de $k$ parties disjointes ayant chacune $p$ éléments, $\mathrm{Card}(E)=kp$. (Le berger compte les pattes et divise par 4.) Sert aussi « à l'envers » : $p=\mathrm{Card}(E)/k$.</p>
+
+<div class="box coeur"><div class="t">Prop 2.27 — Réunion quelconque (PAR CŒUR)</div>
+<p>$$\mathrm{Card}(A\cup B)=\mathrm{Card}A+\mathrm{Card}B-\mathrm{Card}(A\cap B).$$</p>
+<p>Pourquoi le « moins » : en additionnant $A$ et $B$, les éléments de $A\cap B$ ont été comptés <b>deux fois</b>. On en retire une.</p></div>
+<details><summary>Démonstration rédigée (utilise la somme disjointe deux fois)</summary>
+<p>$A\cup B=A\cup(B\setminus A)$, et $A$, $B\setminus A$ sont disjoints : $\mathrm{Card}(A\cup B)=\mathrm{Card}A+\mathrm{Card}(B\setminus A)$.<br>
+$B=(B\setminus A)\cup(B\cap A)$, disjoints : $\mathrm{Card}B=\mathrm{Card}(B\setminus A)+\mathrm{Card}(A\cap B)$, d'où $\mathrm{Card}(B\setminus A)=\mathrm{Card}B-\mathrm{Card}(A\cap B)$.<br>
+On remplace : c'est la formule. (Au passage, ça démontre l'exercice 2.6 : $\mathrm{Card}(A\setminus B)=\mathrm{Card}A-\mathrm{Card}(A\cap B)$, et si $B\subset A$, $\mathrm{Card}(A\setminus B)=\mathrm{Card}A-\mathrm{Card}B$.)</p></details>
+
+<div class="box coeur"><div class="t">Formule de Poincaré pour 3 ensembles (exercice 2.7, à savoir)</div>
+<p>$$|A\cup B\cup C|=|A|+|B|+|C|-|A\cap B|-|A\cap C|-|B\cap C|+|A\cap B\cap C|.$$
+Règle : on ajoute les seuls, on retire les intersections deux à deux, on rajoute l'intersection triple (signes alternés).</p></div>
+<details><summary>Démonstration</summary>
+<p>On applique la formule à 2 ensembles avec $A\cup B$ et $C$ :
+$|A\cup B\cup C|=|A\cup B|+|C|-|(A\cup B)\cap C|$.
+Or $(A\cup B)\cap C=(A\cap C)\cup(B\cap C)$, donc $|(A\cup B)\cap C|=|A\cap C|+|B\cap C|-|A\cap B\cap C|$ (formule à 2 ensembles encore, car $(A\cap C)\cap(B\cap C)=A\cap B\cap C$).
+Avec $|A\cup B|=|A|+|B|-|A\cap B|$, on obtient la formule.</p></details>
+
+<div class="box ex"><div class="t">Exercice 2.17 (fait le 3/11, à refaire seul) — le vote</div>
+<p>200 membres. 112 ont voté A ; 67 pour A et B ; 32 pour A et C ; 12 pour A, B et C ; 5 pour B et C mais pas A ; 56 pour C mais ni A ni B ; 22 pour B mais pas A. Combien : (1) A mais pas B ? (2) C ? (3) aucun des trois ? (4) uniquement A ?</p></div>
+<details><summary>Correction (faire un diagramme de Venn au brouillon !)</summary>
+<p><b>Méthode</b> : dessine 3 cercles A, B, C qui se chevauchent (8 zones) et remplis les zones une par une.</p>
+<p><b>(1)</b> $|A\setminus B|=|A|-|A\cap B|=112-67=45$.</p>
+<p><b>(2)</b> On découpe $C$ en morceaux disjoints : $C=(C\cap A)\cup(C\cap\overline A\cap B)\cup(C\cap\overline A\cap\overline B)$. (Ils sont disjoints deux à deux : l'un est dans $A$, les autres hors de $A$ ; et parmi ceux hors de $A$, l'un est dans $B$, l'autre non — c'est ce que vérifie la dernière page de tes notes.) Donc $|C|=32+5+56=93$.</p>
+<p><b>(3)</b> $A\cup B\cup C=A\cup(B\cap\overline A)\cup(C\cap\overline A\cap\overline B)$ (disjoints) : $112+22+56=190$. Aucun : $200-190=10$.</p>
+<p><b>(4)</b> Uniquement A $=A\cap\overline B\cap\overline C$. Dans $A$, on retire ceux qui ont aussi voté B (67) et ceux qui ont aussi voté C (32), mais ceux qui ont voté les trois (12) ont été retirés deux fois : $112-67-32+12=25$.</p></details>
+
+<h3 id="c2-6">2.6 Principe du produit</h3>
+
+<div class="box thm"><div class="t">Prop 2.29 — Produit cartésien</div>
+<p>$\mathrm{Card}(E\times F)=\mathrm{Card}E\times\mathrm{Card}F$ ; $\mathrm{Card}(E_1\times\dots\times E_k)=\prod\mathrm{Card}E_i$ ; $\mathrm{Card}(E^p)=n^p$.</p></div>
+<p>Cantine (2.30) : 3 entrées, 2 plats, 2 accompagnements, 4 desserts : $3\times2\times2\times4=48$ menus.</p>
+
+<div class="box thm"><div class="t">Prop 2.31 — Principe multiplicatif (plus général)</div>
+<p>Si chaque objet se construit en 2 étapes, la 1re avec $n$ possibilités et la 2e avec $m$ possibilités <b>quel que soit le choix fait à la 1re</b>, alors il y a $nm$ objets. (Idem avec $k$ étapes.)</p></div>
+<p><b>Exemple 2.32</b> : tirer 2 cartes successivement sans remise dans 32 : $32\times31=992$. Ce n'est pas un produit cartésien (la 2e carte dépend de la 1re), mais le <b>nombre</b> de choix à la 2e étape (31) ne dépend pas de la 1re : le principe marche.<br>
+<b>Exemple 2.33</b> : 3 entrées, puis 2 files (chacune : un plat fixé + 2 desserts au choix) : $3\times2\times2=12$.</p>
+<div class="box piege"><div class="t">Piège : « quel que soit le choix précédent »</div>
+<p>Si la file 2 avait 3 desserts et la file 1 seulement 2, le nombre de choix à l'étape « dessert » dépendrait de l'étape précédente : on ne peut plus multiplier. Il faut alors <b>découper en cas</b> et additionner (principe de la somme) : $3\times(2+3)=15$.</p></div>
+
+<h3 id="c2-7">2.7 Applications entre ensembles finis</h3>
+
+<div class="box thm"><div class="t">Prop 2.34 — Comparer des cardinaux avec des applications</div>
+<ul><li>$f:E\to F$ <b>injective</b> et $F$ fini ⟹ $E$ fini et $\mathrm{Card}E\le\mathrm{Card}F$.</li>
+<li>$f:E\to F$ <b>surjective</b> et $E$ fini ⟹ $F$ fini et $\mathrm{Card}E\ge\mathrm{Card}F$.</li></ul></div>
+<p><b>Intuition</b> : injective = on « range » chaque élément de $E$ dans un élément différent de $F$, donc il faut au moins autant de places : $|E|\le|F|$. Surjective = chaque élément de $F$ reçoit au moins un élément de $E$, donc il faut au moins autant d'éléments dans $E$ : $|E|\ge|F|$.</p>
+<details><summary>Démonstration expliquée</summary>
+<p><b>1.</b> $f$ injective, donc en co-restreignant à $f(E)$ on obtient une bijection $E\to f(E)$ (injective, et surjective sur son image). $f(E)\subset F$ fini, donc $f(E)$ est fini de cardinal $n\le\mathrm{Card}F$ (Prop 2.22). En composant $E\to f(E)\to[\![1,n]\!]$ (deux bijections), on a une bijection $E\to[\![1,n]\!]$ : $E$ est fini de cardinal $n\le\mathrm{Card}F$.</p>
+<p><b>2.</b> $f$ surjective : pour chaque $y\in F$, on choisit <b>un</b> antécédent qu'on note $g(y)$. Ça définit $g:F\to E$ avec $f(g(y))=y$. $g$ est injective : si $g(y)=g(y')$, alors $y=f(g(y))=f(g(y'))=y'$. On applique le 1 à $g$ : $\mathrm{Card}F\le\mathrm{Card}E$.</p></details>
+
+<p><b>Conséquence : le principe des tiroirs.</b> Si $|E|>|F|$, aucune application $E\to F$ n'est injective : il y a forcément deux éléments de $E$ qui ont la même image. « Si on range 11 chaussettes dans 10 tiroirs, un tiroir contient au moins 2 chaussettes. » (Ex 2.9.5 plus bas.)</p>
+
+<div class="box thm"><div class="t">Prop 2.35</div>
+<p>Deux ensembles finis de même cardinal sont en bijection. Réciproquement, si $F$ est fini et $E$ en bijection avec $F$, $E$ est fini et $\mathrm{Card}E=\mathrm{Card}F$.</p>
+<p><b>Preuve</b> : $E\xrightarrow{h}[\![1,n]\!]\xrightarrow{g^{-1}}F$ est une bijection (composée de bijections). Réciproque : $E\xrightarrow{f}F\xrightarrow{g}[\![1,n]\!]$. C'est la méthode n°1 pour compter : <b>trouver une bijection avec un ensemble dont on connaît le cardinal.</b></p></div>
+
+<div class="box coeur"><div class="t">Prop 2.36 — LE théorème important du chapitre</div>
+<p>Si $\mathrm{Card}E=\mathrm{Card}F=n$ (finis !) et $f:E\to F$, alors :
+$$f\text{ injective}\iff f\text{ surjective}\iff f\text{ bijective}.$$
+Donc pour montrer qu'une telle $f$ est bijective, <b>il suffit de montrer l'injectivité</b> (ou la surjectivité).</p></div>
+<div class="box demo"><div class="t">Démonstration expliquée</div>
+<p><b>Injective ⟹ surjective.</b> Écrivons $E=\{x_1,\dots,x_n\}$. Les images $f(x_1),\dots,f(x_n)$ sont toutes <b>différentes</b> (injectivité), donc $f(E)$ a exactement $n$ éléments. Or $f(E)\subset F$ et $|F|=n$. Une partie qui a autant d'éléments que l'ensemble est l'ensemble entier (Prop 2.22) : $f(E)=F$, $f$ est surjective.</p>
+<p><b>Surjective ⟹ bijective.</b> Écrivons $F=\{y_1,\dots,y_n\}$ et $A_i=f^{-1}(\{y_i\})$ (les antécédents de $y_i$). Surjective : chaque $A_i$ a au moins 1 élément. Les $A_i$ sont disjoints (un $x$ n'a qu'une image). Donc $\sum|A_i|=|A_1\cup\dots\cup A_n|\le|E|=n$. Une somme de $n$ entiers $\ge1$ qui vaut au plus $n$ : chacun vaut exactement 1. Donc chaque $y_i$ a exactement un antécédent : bijective.</p>
+<p><b>Bijective ⟹ injective</b> : par définition.</p>
+<p><b>Avec des mots</b> : $n$ invités, $n$ chaises. Si personne ne partage de chaise (injectif), toutes les chaises sont prises (surjectif). Si toutes les chaises sont prises (surjectif), personne ne peut partager (sinon il manquerait quelqu'un pour une chaise).</p></div>
+<div class="box piege"><div class="t">Piège : les hypothèses sont indispensables</div>
+<p>• <b>Infini</b> : $n\mapsto n+1$ de $\mathbb N$ dans $\mathbb N$ est injective mais pas surjective.<br>
+• <b>Cardinaux différents</b> : $\{1\}\to\{1,2\}$ peut être injective sans être surjective.</p></div>
+
+<h3 id="c2-8">2.8 Dénombrement : listes, arrangements, permutations, combinaisons</h3>
+
+<p>Tout repose sur <b>deux questions</b> à se poser devant chaque exercice :</p>
+<div class="box coeur"><div class="t">Les 2 questions magiques</div>
+<ol><li><b>L'ordre compte-t-il ?</b> (Est-ce que (A,B) et (B,A) sont deux résultats différents ? Un podium : oui. Une équipe : non.)</li>
+<li><b>Les répétitions sont-elles possibles ?</b> (Avec remise : oui. Sans remise, personnes différentes : non.)</li></ol>
+<table>
+<tr><th></th><th>Répétitions possibles</th><th>Pas de répétition</th></tr>
+<tr><th>Ordre compte</th><td><b>$p$-liste</b> : $n^p$<br><i>code PIN, tirages avec remise, mots</i></td><td><b>arrangement</b> : $A_n^p=\dfrac{n!}{(n-p)!}$<br><i>podium, tirages successifs sans remise, bureau président/VP/secrétaire</i></td></tr>
+<tr><th>Ordre ne compte pas</th><td><i>(hors programme de ce chapitre)</i></td><td><b>combinaison</b> : $\binom np=\dfrac{n!}{p!\,(n-p)!}$<br><i>main de cartes, comité, tirage simultané</i></td></tr>
+</table>
+<p>Cas particulier : arrangement de <b>tous</b> les $n$ éléments = <b>permutation</b> : $n!$.</p></div>
+
+<div class="box def"><div class="t">Déf 2.37 / Prop 2.39 — $p$-listes</div>
+<p>Une $p$-liste de $E$ est un élément de $E^p$ : une suite ordonnée $(x_1,\dots,x_p)$, <b>répétitions autorisées</b>. Nombre : $n^p$ (produit cartésien). Ex : les mots de 3 lettres (ANE, AAA…) : $26^3$.</p></div>
+
+<div class="box def"><div class="t">Déf 2.40 / Prop 2.41 — Arrangements</div>
+<p>Un $p$-arrangement : $p$-liste dont les éléments sont <b>tous différents</b>. Nombre :
+$$A_n^p=\underbrace{n(n-1)\cdots(n-p+1)}_{p\text{ facteurs}}=\frac{n!}{(n-p)!}\ \text{ si }p\le n,\qquad A_n^p=0\text{ si }p>n.$$</p>
+<p><b>Preuve</b> : $n$ choix pour le 1er, puis $n-1$ (on ne peut pas reprendre le 1er), …, le $p$-ième a $n-(p-1)=n-p+1$ choix. Principe du produit.</p>
+<p>$A_n^0=1$, $A_n^1=n$, $A_n^n=n!$. <b>Nombre d'injections</b> d'un ensemble à $p$ éléments dans un ensemble à $n$ éléments $=A_n^p$ (une injection, c'est choisir des images toutes différentes, dans l'ordre des éléments de départ).</p></div>
+
+<div class="box def"><div class="t">Déf 2.44 / Prop 2.45 — Permutations</div>
+<p>Une permutation de $E$ ($|E|=n$) = un $n$-arrangement = une façon d'ordonner tous les éléments. Nombre : $n!=n\times(n-1)\times\dots\times1$. C'est aussi le nombre de <b>bijections</b> de $E$ dans $E$.</p>
+<p>Ex 2.47 : classements des 14 équipes du Top 14 : $14!$. Les 6 premiers (ordonnés) : $A_{14}^6=14\times13\times12\times11\times10\times9$.</p></div>
+
+<div class="box def"><div class="t">Déf 2.48 / Prop 2.50 — Combinaisons</div>
+<p>Une $p$-combinaison de $E$ = une <b>partie</b> de $E$ à $p$ éléments (pas d'ordre, pas de répétition). $\mathcal P_p(E)$ = ensemble de ces parties.
+$$\binom np=\mathrm{Card}\,\mathcal P_p(E)=\frac{n!}{p!\,(n-p)!}\quad(0\le p\le n).$$
+$\binom n0=\binom nn=1$, $\binom n1=n$. Ex : $E=\{1,2,3\}$, $\mathcal P_2(E)=\{\{1,2\},\{1,3\},\{2,3\}\}$, $\binom32=3$.</p></div>
+
+<div class="box demo"><div class="t">Démonstration de la formule $\binom np=\frac{n!}{p!(n-p)!}$ — à comprendre absolument</div>
+<p>On compte les $p$-arrangements de <b>deux façons</b>.</p>
+<p><b>Façon 1</b> : on sait qu'il y en a $A_n^p=\frac{n!}{(n-p)!}$.</p>
+<p><b>Façon 2</b> : construire un arrangement (ordonné), c'est<br>
+&nbsp;&nbsp;étape 1 : choisir <b>quels</b> $p$ éléments on prend (sans ordre) : $\binom np$ façons ;<br>
+&nbsp;&nbsp;étape 2 : choisir <b>dans quel ordre</b> on les met : $p!$ façons.<br>
+Principe du produit : $A_n^p=\binom np\times p!$.</p>
+<p>Donc $\binom np=\dfrac{A_n^p}{p!}=\dfrac{n!}{p!\,(n-p)!}$.</p>
+<p><b>Exemple concret</b> : podiums de 3 parmi 5 coureurs : $A_5^3=60$. Mais chaque groupe de 3 coureurs donne $3!=6$ podiums différents. Donc le nombre de groupes de 3 est $60/6=10=\binom53$.</p>
+<p><b>Retiens la phrase</b> : « une combinaison, c'est un arrangement dont on a oublié l'ordre, donc on divise par $p!$ ».</p></div>
+
+<div class="box piege"><div class="t">Piège : arrangement ou combinaison ?</div>
+<p>$(1,2)\ne(2,1)$ (couples, arrangements) mais $\{1,2\}=\{2,1\}$ (parties, combinaisons). Indices dans l'énoncé :<br>
+• « successivement », « classement », « dans l'ordre », « rôles différents » (président, VP…), « mot », « code » → <b>ordre</b>.<br>
+• « simultanément », « une main », « un groupe », « un comité », « choisir $p$ parmi $n$ » → <b>pas d'ordre</b>.<br>
+• « avec remise » → <b>répétitions</b> → $n^p$.</p></div>
+
+<div class="box coeur"><div class="t">Prop 2.53 — Propriétés des coefficients binomiaux (+ preuves combinatoires)</div>
+<p><b>Symétrie</b> : $\binom np=\binom n{n-p}$. <i>Preuve</i> : choisir les $p$ qu'on prend, c'est choisir les $n-p$ qu'on laisse. (L'application $A\mapsto\overline A$ est une bijection de $\mathcal P_p(E)$ sur $\mathcal P_{n-p}(E)$.)</p>
+<p><b>Pascal</b> : $\binom np=\binom{n-1}{p-1}+\binom{n-1}p$ pour $1\le p\le n-1$.<br>
+<i>Preuve combinatoire</i> : on fixe un élément $x$ de $E$. Une partie à $p$ éléments :<br>
+— soit <b>contient $x$</b> : il reste à choisir $p-1$ éléments parmi les $n-1$ autres : $\binom{n-1}{p-1}$ ;<br>
+— soit <b>ne contient pas $x$</b> : on choisit les $p$ éléments parmi les $n-1$ autres : $\binom{n-1}p$.<br>
+Les deux cas sont disjoints et couvrent tout : principe de la somme.</p>
+<p><b>Somme</b> (ex 2.20) : $\sum_{k=0}^n\binom nk=2^n$. <i>Preuve</i> : on compte $\mathcal P(E)$ de deux façons. D'un côté $2^n$. De l'autre, on range les parties selon leur nombre d'éléments $k=0,1,\dots,n$ : ce sont des cas disjoints, il y en a $\binom nk$ pour chaque $k$.</p>
+<p class="sub">La « méthode combinatoire » = compter le même ensemble de deux façons différentes. Le prof l'adore (ex 2.20, 2.21 à faire pour le prochain cours).</p></div>
+
+<p><b>Triangle de Pascal</b> (chaque nombre = somme des deux au-dessus) :</p>
+<table style="width:auto;text-align:center">
+<tr><td>n=0</td><td>1</td></tr>
+<tr><td>n=1</td><td>1 1</td></tr>
+<tr><td>n=2</td><td>1 2 1</td></tr>
+<tr><td>n=3</td><td>1 3 3 1</td></tr>
+<tr><td>n=4</td><td>1 4 6 4 1</td></tr>
+<tr><td>n=5</td><td>1 5 10 10 5 1</td></tr>
+<tr><td>n=6</td><td>1 6 15 20 15 6 1</td></tr>
+</table>
+
+<!-- ===================================================== -->
+<h3 id="c2-ex">2.9 Exercices corrigés du chapitre 2</h3>
+
+<div class="box ex"><div class="t">Exercice 2.8 — couples $(i,j)\in[\![1,n]\!]^2$ avec $i>j$</div></div>
+<details><summary>Correction</summary>
+<p>$A_i$ = couples de 1re composante $i$ : $j\in[\![1,i-1]\!]$, donc $|A_i|=i-1$. Les $A_i$ sont disjoints, réunion $=E$. $|E|=\sum_{i=1}^n(i-1)=0+1+\dots+(n-1)=\frac{n(n-1)}2$.<br>
+Autre façon : un tel couple correspond à une partie $\{i,j\}$ à 2 éléments (on met le plus grand en premier) : $\binom n2=\frac{n(n-1)}2$. Même résultat ✔.</p></details>
+
+<div class="box ex"><div class="t">Exercice 2.9 — six petites questions</div>
+<p>1. Codes PIN à 4 chiffres. 2. 3 spécialités parmi 9. 3. Tiercés (3 premiers ordonnés) avec 10 chevaux. 4. Mains de 4 cartes dans 32. 5. Combien d'habitants pour être sûr que deux ont les mêmes initiales ? 6. Nombres de 6 chiffres multiples de 5.</p></div>
+<details><summary>Correction</summary>
+<ol>
+<li>Ordre compte, répétition possible : 4-listes de $\{0,\dots,9\}$ : $10^4=10\,000$.</li>
+<li>Pas d'ordre, pas de répétition : $\binom93=\frac{9\cdot8\cdot7}{6}=84$.</li>
+<li>Ordre, pas de répétition : $A_{10}^3=10\cdot9\cdot8=720$.</li>
+<li>Main = ensemble : $\binom{32}4=\frac{32\cdot31\cdot30\cdot29}{24}=35\,960$.</li>
+<li>Initiales (prénom, nom) = couple de lettres : $26^2=676$ possibilités. Avec 676 habitants, on peut encore (en théorie) avoir toutes les initiales différentes. Avec <b>677</b>, l'application habitant ↦ initiales va d'un ensemble à 677 éléments dans un ensemble à 676 : elle ne peut pas être injective (Prop 2.34, tiroirs). Réponse : 677.</li>
+<li>1er chiffre : 1 à 9 (9 choix, pas de 0 devant) ; 4 chiffres du milieu : $10^4$ ; dernier : 0 ou 5 (2 choix). Total $9\times10^4\times2=180\,000$.</li>
+</ol></details>
+
+<div class="box ex"><div class="t">Exercices 2.10, 2.11, 2.12</div>
+<p>2.10 : deux personnes sur 6 sièges alignés ; en cercle ; 18 personnes autour d'une table ronde. 2.11 : comité de 11 : président, VP, secrétaire ; puis 3 membres sans fonction. 2.12 : 2 parapluies pour 5 personnes, identiques puis différents.</p></div>
+<details><summary>Correction</summary>
+<p><b>2.10.1</b> La 1re personne choisit un siège (6), la 2e un autre (5) : $A_6^2=30$.<br>
+<b>2.10.2</b> En cercle, on considère généralement que deux placements qui se déduisent par une <b>rotation</b> sont identiques (seules les positions relatives comptent). On fixe la 1re personne (la rotation ne compte pas), la 2e a 5 places : <b>5</b>. (Si les sièges sont numérotés, c'est encore 30 : précise ton hypothèse sur ta copie.)<br>
+<b>2.10.3</b> Même idée : on fixe une personne, on permute les 17 autres : $17!$ (soit $18!/18$ : chaque disposition est comptée 18 fois, une par rotation — lemme des bergers à l'envers !).</p>
+<p><b>2.11.1</b> Rôles distincts → ordre : $A_{11}^3=11\cdot10\cdot9=990$. <b>2.11.2</b> Sans rôle : $\binom{11}3=165$ (= 990/3!).</p>
+<p><b>2.12</b> (chacun prend au plus un parapluie) Identiques : on choisit juste les 2 personnes qui en reçoivent : $\binom52=10$. Différents : on choisit qui reçoit le parapluie 1 puis qui reçoit le 2 : $A_5^2=20$.</p></details>
+
+<div class="box ex"><div class="t">Exercice 2.13 — la cantine (« à terminer » d'après tes notes)</div>
+<p>4 entrées, 3 plats, 5 desserts. 1. Menus entrée+plat+dessert. 2. Si pas de dessert, on peut prendre deux entrées : combien de possibilités en tout ? 3. Deux élèves choisissent des entrées, plats, desserts différents et se les partagent.</p></div>
+<details><summary>Correction</summary>
+<p><b>1.</b> $4\times3\times5=60$.</p>
+<p><b>2.</b> Deux cas disjoints (principe de la somme) :<br>
+• menu normal : 60 ;<br>
+• sans dessert, 2 entrées (différentes, l'ordre ne compte pas) + 1 plat : $\binom42\times3=6\times3=18$.<br>
+Total : $60+18=78$.</p>
+<p><b>3.</b> Ils prennent 2 entrées différentes, 2 plats différents, 2 desserts différents, et partagent (donc l'ordre ne compte pas) : $\binom42\times\binom32\times\binom52=6\times3\times10=180$.</p>
+<p class="sub">Dans ce genre d'exercice un peu ambigu, écris ton interprétation en une phrase (« les deux entrées sont différentes », « l'ordre ne compte pas car ils partagent ») : le correcteur valide si c'est cohérent.</p></details>
+
+<div class="box ex"><div class="t">Exercice 2.14 — 4 pions numérotés sur 3 cases numérotées (plusieurs pions par case possibles)</div>
+<p>1. Au moins une case vide. 2. Aucune case vide.</p></div>
+<details><summary>Correction</summary>
+<p>Une disposition = une application {pions} → {cases} : $3^4=81$ dispositions.</p>
+<p><b>2.</b> Aucune case vide = <b>surjection</b>. 4 pions dans 3 cases sans case vide : une case contient 2 pions, les autres 1 chacune. Choix de la case double : 3 ; choix des 2 pions qui y vont : $\binom42=6$ ; répartition des 2 pions restants dans les 2 cases restantes, un par case : $2!=2$. Total $3\times6\times2=36$.</p>
+<p><b>1.</b> Complémentaire : $81-36=45$.</p></details>
+
+<div class="box ex"><div class="t">Exercice 2.15 — 5 bleues, 8 rouges, 4 tirages successifs AVEC remise</div>
+<p>Nombre de tirages avec : au moins une bleue ; au plus une rouge ; 3 rouges et 1 bleue ; 2 rouges et 2 bleues.</p></div>
+<details><summary>Correction</summary>
+<p>Total : 4-listes de 13 boules : $13^4=28\,561$.</p>
+<ul>
+<li><b>Au moins une bleue</b> = total − aucune bleue (que des rouges) : $13^4-8^4=28\,561-4\,096=24\,465$.</li>
+<li><b>Au plus une rouge</b> = 0 rouge + exactement 1 rouge : $5^4+\binom41\cdot8\cdot5^3=625+4\,000=4\,625$.</li>
+<li><b>3 rouges, 1 bleue</b> : on choisit la position de la bleue parmi les 4 tirages ($\binom41=4$), puis quelle bleue (5), puis les 3 rouges dans l'ordre ($8^3$) : $4\times5\times512=10\,240$.</li>
+<li><b>2 rouges, 2 bleues</b> : positions des rouges $\binom42=6$, puis $8^2\times5^2$ : $6\times64\times25=9\,600$.</li>
+</ul>
+<div class="box piege"><div class="t">Piège : ne pas oublier de choisir les POSITIONS</div><p>Comme le tirage est ordonné, « 3 rouges et 1 bleue » peut être RRRB, RRBR, RBRR, BRRR : c'est le facteur $\binom41$. L'oubli de ce facteur est l'erreur n°1.</p></div></details>
+
+<div class="box ex"><div class="t">Exercice 2.16 — 10 boules : 1 à 4 rouges, 5 à 10 noires ; on tire 5 boules</div>
+<p>1. Simultanément : (a) total, (b) 2 rouges et 3 noires, (c) au moins une rouge. 2. Successivement sans remise : mêmes questions.</p></div>
+<details><summary>Correction</summary>
+<p><b>1. Simultané = combinaisons.</b><br>
+(a) $\binom{10}5=252$. (b) $\binom42\binom63=6\times20=120$. (c) Complémentaire : aucune rouge = 5 noires parmi 6 : $\binom65=6$. Donc $252-6=246$.</p>
+<p><b>2. Successif sans remise = arrangements.</b><br>
+(a) $A_{10}^5=10\cdot9\cdot8\cdot7\cdot6=30\,240$.<br>
+(b) Positions des 2 rouges parmi les 5 tirages : $\binom52=10$ ; rouges dans l'ordre : $A_4^2=12$ ; noires dans l'ordre : $A_6^3=120$. Total $10\times12\times120=14\,400$. (Vérif : $120\times5!=14\,400$ : chaque tirage simultané donne $5!$ tirages ordonnés ✔.)<br>
+(c) $A_{10}^5-A_6^5=30\,240-720=29\,520$.</p></details>
+
+<div class="box ex"><div class="t">Exercices 2.18 et 2.19 — mots et anagrammes</div>
+<p>2.18 : les 6 lettres de FRANCE sur des cartons, tirés un par un. Sans remise : (a) nombre de mots, (b) FRA en premier puis les 3 autres dans n'importe quel ordre. Puis avec remise. 2.19 : anagrammes de MATHS, de SEINE.</p></div>
+<details><summary>Correction</summary>
+<p><b>2.18 sans remise</b> : (a) permutations des 6 lettres : $6!=720$. (b) les 3 premières sont imposées (1 façon), les 3 dernières C, N, E dans un ordre quelconque : $3!=6$.<br>
+<b>Avec remise</b> : (a) 6-listes : $6^6=46\,656$. (b) F, R, A imposés aux 3 premiers tirages, puis 3 tirages quelconques : $6^3=216$.</p>
+<p><b>2.19</b> MATHS : 5 lettres distinctes, $5!=120$. SEINE : on numérote $E_1,E_2$ : $5!=120$ « mots » avec des E distincts. Mais échanger $E_1$ et $E_2$ donne le même mot : chaque anagramme est comptée $2!=2$ fois (lemme des bergers). Donc $120/2=60$.</p></details>
+
+<div class="box ex"><div class="t">Exercices 2.20 et 2.21 — preuves combinatoires (à faire pour le prochain cours !)</div>
+<p>2.20 : $\binom n0=\binom nn$ et $\sum_{k=0}^n\binom nk=2^n$. 2.21 : $E=\{a,\dots,l\}$ (12 éléments). Parties à 5 éléments qui contiennent : a et b ; a mais pas b ; b mais pas a ; ni a ni b. En déduire $\binom{12}5=\binom{10}3+2\binom{10}4+\binom{10}5$, puis généraliser : $\binom np=\binom{n-2}{p-2}+2\binom{n-2}{p-1}+\binom{n-2}p$.</p></div>
+<details><summary>Correction</summary>
+<p><b>2.20</b> : $\binom n0=1$ (seule partie à 0 élément : $\emptyset$) et $\binom nn=1$ (seule partie à $n$ éléments : $E$). La somme : voir Prop 2.53 ci-dessus (compter $\mathcal P(E)$ de deux façons).</p>
+<p><b>2.21.1(a)</b> Contient a et b : il reste 3 éléments à choisir parmi les 10 autres : $\binom{10}3=120$. a mais pas b : 4 parmi les 10 autres : $\binom{10}4=210$. b mais pas a : $210$. Ni a ni b : 5 parmi 10 : $\binom{10}5=252$.<br>
+<b>(b)</b> Ces 4 cas sont disjoints et couvrent toutes les parties à 5 éléments (principe de la somme) : $\binom{12}5=120+210+210+252=792$ ✔ ($\binom{12}5=792$).<br>
+<b>2.</b> Même raisonnement avec un ensemble à $n$ éléments, deux éléments fixés $a,b$, et des parties à $p$ éléments : contient les deux : $\binom{n-2}{p-2}$ ; exactement un des deux (2 cas symétriques) : $2\binom{n-2}{p-1}$ ; aucun : $\binom{n-2}p$. On somme.</p></details>
+
+<!-- ===================================================== -->
+<h2 id="fiche">3. Fiche « par cœur », pièges, plan de révision</h2>
+
+<div class="box coeur"><div class="t">Les définitions avec quantificateurs (à savoir écrire sans réfléchir)</div>
+<ul>
+<li>$y\in f(A)\iff\exists x\in A,\ y=f(x)$</li>
+<li>$x\in f^{-1}(B)\iff f(x)\in B$</li>
+<li>$f$ injective $\iff\forall x,x'\in E,\ f(x)=f(x')\Rightarrow x=x'$</li>
+<li>$f$ surjective $\iff\forall y\in F,\ \exists x\in E,\ y=f(x)\iff f(E)=F$</li>
+<li>$f$ bijective $\iff\forall y\in F,\ \exists!x\in E,\ y=f(x)$ ; $\ y=f(x)\iff x=f^{-1}(y)$</li>
+<li>$f$ bijective $\iff\exists g,\ g\circ f=\mathrm{id}_E$ et $f\circ g=\mathrm{id}_F$ ; involution : $f\circ f=\mathrm{id}\Rightarrow f^{-1}=f$</li>
+<li>Réflexive, symétrique, antisymétrique, transitive (tableau §2.1). Ordre = R+A+T ; équivalence = R+S+T.</li>
+<li>$\mathrm{Cl}(x)=\{y\in E\ /\ y\,\mathcal R\,x\}$ ; les classes forment une partition.</li>
+<li>Partition : non vides, disjointes 2 à 2, réunion = $E$.</li>
+<li>Équipotents = il existe une bijection ; dénombrable = équipotent à $\mathbb N$.</li>
+</ul></div>
+
+<div class="box coeur"><div class="t">Les résultats</div>
+<ul>
+<li>$A\subset f^{-1}(f(A))$ ; $f(f^{-1}(B))\subset B$ (égalités ssi injective / surjective).</li>
+<li>$f(A\cup C)=f(A)\cup f(C)$, $f(A\cap C)\subset f(A)\cap f(C)$ ; $f^{-1}$ respecte $\cap$ et $\cup$.</li>
+<li>Composées : inj∘inj = inj ; surj∘surj = surj ; $g\circ f$ inj ⟹ $f$ inj ; $g\circ f$ surj ⟹ $g$ surj ; $(g\circ f)^{-1}=f^{-1}\circ g^{-1}$.</li>
+<li>$|A\cup B|=|A|+|B|-|A\cap B|$ ; Poincaré à 3 ; $|\overline A|=|E|-|A|$.</li>
+<li>$|E\times F|=|E||F|$ ; $|\mathcal P(E)|=2^n$ ; $|\mathcal F(E,F)|=p^n$ (arrivée$^{\text{départ}}$).</li>
+<li>Même cardinal fini : injective ⟺ surjective ⟺ bijective.</li>
+<li>$n^p$ ; $A_n^p=\frac{n!}{(n-p)!}$ ; $n!$ ; $\binom np=\frac{n!}{p!(n-p)!}$ ; $\binom np=\binom n{n-p}$ ; Pascal ; $\sum\binom nk=2^n$.</li>
+</ul></div>
+
+<div class="box piege"><div class="t">Les 12 pièges qui coûtent des points</div>
+<ol>
+<li>Confondre $\in$ et $\subset$ ; $f(x)$ (élément) et $f(A)$ (ensemble).</li>
+<li>Écrire $f^{-1}(y)$ alors que $f$ n'est pas bijective (écrire $f^{-1}(\{y\})$).</li>
+<li>Oublier de vérifier que la composée existe (arrivée de $f$ ⊂ départ de $g$).</li>
+<li>Lire $g\circ f$ dans le mauvais sens.</li>
+<li>Calculer $f([a,b])$ comme $[f(a),f(b)]$ sans regarder les variations.</li>
+<li>Oublier les antécédents négatifs dans $f^{-1}$ avec $x^2$.</li>
+<li>Surjectivité : trouver $x$ mais ne pas vérifier $x\in E$.</li>
+<li>Montrer une non-injectivité/non-surjectivité sans contre-exemple numérique explicite.</li>
+<li>Confondre antisymétrique et « pas symétrique ».</li>
+<li>Utiliser « injective ⟺ surjective » pour des ensembles infinis ou de cardinaux différents.</li>
+<li>Compter $b-a$ au lieu de $b-a+1$ entiers dans $[\![a,b]\!]$.</li>
+<li>Dénombrement : se tromper ordre/pas d'ordre, oublier le facteur des positions, oublier le complémentaire pour « au moins un ».</li>
+</ol></div>
+
+<div class="box astuce"><div class="t">Plan de révision conseillé</div>
+<ol>
+<li><b>Jour 1</b> : Partie 0 + §1.1 à 1.6. Refais seul les preuves des Prop 1.22, 1.26, 1.27 et l'exercice 1.6 (sans regarder).</li>
+<li><b>Jour 2</b> : §1.7 à 1.9. Refais les preuves 1.37 et 1.42 (les 4 points). Exercices 1.15, 1.21/1.22.</li>
+<li><b>Jour 3</b> : Exercices 1.5, 1.10, 1.18, 1.19. Puis l'<b>exercice 1 du partiel 2024</b> (involution, $f(B)$, $f^{-1}(B)$) en conditions réelles.</li>
+<li><b>Jour 4</b> : §2.1 à 2.3 (relations). Exercices 2.1, 2.2, 2.3. Puis exercices 3 et 4 du partiel 2024.</li>
+<li><b>Jour 5</b> : §2.4 à 2.7. Exercices 2.4, 2.5, 2.17 (sans regarder !).</li>
+<li><b>Jour 6</b> : §2.8. Tous les exercices 2.9 à 2.21. Apprends le tableau ordre/répétition.</li>
+<li><b>Jour 7</b> : partiels 2022 (exercice 1) et 2023 (exercices 1 et 2) chronométrés, puis relecture de cette fiche et des pièges.</li>
+</ol>
+<p>Règle d'or : <b>une preuve n'est sue que si tu peux la réécrire sur une feuille blanche.</b> Lire ne suffit pas. Cache la correction, écris, compare.</p></div>
+
+<div class="box ex"><div class="t">Auto-test express (réponds de tête, puis ouvre)</div>
+<ol>
+<li>$f:\mathbb R\to\mathbb R,\ x\mapsto x^2$. Que vaut $f([-2,1])$ ? $f^{-1}([1,4])$ ?</li>
+<li>$f:\mathbb R\to\mathbb R,\ x\mapsto e^x$ est-elle injective ? surjective ? Et de $\mathbb R$ dans $\mathbb R_+^*$ ?</li>
+<li>Si $g\circ f$ est bijective, que peut-on dire de $f$ et de $g$ ?</li>
+<li>La relation $\le$ sur $\mathbb R$ est-elle une relation d'équivalence ?</li>
+<li>Combien de parties à 3 éléments dans un ensemble à 7 éléments ? Combien d'applications de $\{1,2,3\}$ dans $\{a,b\}$ ? Combien d'injections ?</li>
+</ol></div>
+<details><summary>Réponses</summary>
+<ol>
+<li>$f([-2,1])=[0,4]$ (passe par 0, max en $-2$). $f^{-1}([1,4])=[-2,-1]\cup[1,2]$.</li>
+<li>Injective oui (strictement croissante), surjective non ($-1$ pas atteint). De $\mathbb R$ dans $\mathbb R_+^*$ : bijective, réciproque $\ln$.</li>
+<li>$f$ est injective (1.37) et $g$ est surjective (1.42). On ne peut rien dire de plus en général.</li>
+<li>Non : pas symétrique ($1\le2$ mais pas $2\le1$). C'est une relation d'ordre.</li>
+<li>$\binom73=35$. $2^3=8$ applications. Injections : $A_2^3=0$ (3 &gt; 2, tiroirs).</li>
+</ol></details>
+
+<p style="margin-top:40px" class="sub">Tu n'as pas perdu ton année : les chapitres 1 et 2 sont très « mécaniques » une fois les définitions sues. Si un passage reste flou, dis-moi lequel (ex : « je ne comprends pas la preuve 1.42 ») et je te le réexplique autrement, ou je te fabrique des exercices supplémentaires du même type.</p>
+
+</main>
+</body>
+</html>
